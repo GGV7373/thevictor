@@ -1,0 +1,25 @@
+{
+  "projects": [
+    {
+      "title": "Bibel Ollama",
+      "desc": "A Bible study tool that leverages an LLM to provide insights and interpretations for deeper understanding of scripture.",
+      "tags": ["llm", "python", "open-source"],
+      "link": "https://github.com/GGV7373/Bible-Ollama",
+      "linkText": "View on GitHub"
+    },
+    {
+      "title": "Personal Portfolio",
+      "desc": "A personal portfolio website built with HTML, CSS, and JavaScript to showcase my work and skills.",
+      "tags": ["html-css", "javascript"],
+      "link": "https://thevictor.net",
+      "linkText": "View Website"
+    },
+    {
+      "title": "aiawards.no",
+      "desc": "The official website for the Tangen VGS AI Awards, showcasing nominees, winners, and event details.",
+      "tags": ["web-development", "javascript"],
+      "link": "https://www.aiawards.no",
+      "linkText": "View Website"
+    }
+  ]
+}

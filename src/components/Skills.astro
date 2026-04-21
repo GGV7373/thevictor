@@ -1,0 +1,214 @@
+---
+---
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-list">
+      <!-- Frontend & Languages -->
+      <div class="skill-group">
+        <h3 class="skill-category">Frontend & Languages</h3>
+        <div class="skill-items">
+          <button class="skill-tag" data-skill-tag="html-css">HTML &amp; CSS</button>
+          <button class="skill-tag" data-skill-tag="javascript">JavaScript</button>
+          <button class="skill-tag" data-skill-tag="python">Python</button>
+        </div>
+        <div class="skill-dropdown" id="skill-dropdown">
+          <div class="skill-dropdown-header" id="skill-dropdown-title"></div>
+          <div class="skill-dropdown-projects" id="skill-dropdown-projects"></div>
+          <div class="skill-dropdown-footer">
+            <a href="/projects" class="btn btn-outline">See all projects &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend & Infrastructure -->
+      <div class="skill-group">
+        <h3 class="skill-category">Backend & Infrastructure</h3>
+        <div class="skill-items">
+          <button class="skill-tag" data-skill-tag="mysql">Database Management (MySQL)</button>
+          <button class="skill-tag" data-skill-tag="ubuntu">Linux server (Ubuntu)</button>
+          <button class="skill-tag" data-skill-tag="docker">Docker</button>
+        </div>
+      </div>
+
+      <!-- Cloud & DevOps -->
+      <div class="skill-group">
+        <h3 class="skill-category">Cloud & DevOps</h3>
+        <div class="skill-items">
+          <button class="skill-tag" data-skill-tag="cloudflare">Cloud Services (Cloudflare)</button>
+          <button class="skill-tag" data-skill-tag="networking">TCP/IP and Networking</button>
+          <button class="skill-tag" data-skill-tag="automation">Automation &amp; Scripting</button>
+        </div>
+      </div>
+
+      <!-- AI & ML -->
+      <div class="skill-group">
+        <h3 class="skill-category">AI & ML</h3>
+        <div class="skill-items">
+          <button class="skill-tag" data-skill-tag="llm">AI local and cloud integration</button>
+        </div>
+      </div>
+
+      <!-- Tools & Soft Skills -->
+      <div class="skill-group">
+        <h3 class="skill-category">Tools &amp; Soft Skills</h3>
+        <div class="skill-items">
+          <button class="skill-tag" data-skill-tag="git">Git &amp; GitHub</button>
+          <button class="skill-tag" data-skill-tag="problem-solving">Problem Solving</button>
+          <button class="skill-tag" data-skill-tag="team-collaboration">Team Collaboration</button>
+          <button class="skill-tag" data-skill-tag="project-management">Project Management</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toTagSlug(value) {
+    return String(value || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  function tagLabelFromSlug(slug) {
+    const map = {
+      llm: 'LLM',
+      'open-source': 'Open Source',
+    };
+    if (map[slug]) return map[slug];
+
+    return slug
+      .split('-')
+      .filter(Boolean)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+  }
+
+  let PROJECTS_DATA = [];
+
+  async function loadProjectsData() {
+    try {
+      const response = await fetch('/data/projects.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      PROJECTS_DATA = data.projects;
+      initSkillDropdown();
+    } catch (error) {
+      console.error('Failed to load projects data:', error);
+      PROJECTS_DATA = [
+        {
+          title: 'Bibel Ollama',
+          desc: 'A Bible study tool that leverages an LLM to provide insights and interpretations.',
+          tags: ['llm', 'python'],
+          link: 'https://github.com/GGV7373/Bible-Ollama',
+          linkText: 'View on GitHub',
+        }
+      ];
+      initSkillDropdown();
+    }
+  }
+
+  function initSkillDropdown() {
+    const dropdown = document.getElementById('skill-dropdown');
+    const titleEl = document.getElementById('skill-dropdown-title');
+    const projectsEl = document.getElementById('skill-dropdown-projects');
+
+    if (!dropdown || !titleEl || !projectsEl) return;
+
+    let currentSkill = null;
+
+    function showDropdown(skillTag, button) {
+      const slug = toTagSlug(skillTag);
+      if (!slug) return;
+
+      const matching = PROJECTS_DATA.filter(p => p.tags.includes(slug));
+      const label = tagLabelFromSlug(slug);
+
+      titleEl.textContent = `${label} Projects (${matching.length})`;
+      projectsEl.innerHTML = '';
+
+      if (matching.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'skill-dropdown-empty';
+        empty.textContent = 'No projects found for this skill yet.';
+        projectsEl.appendChild(empty);
+      } else {
+        matching.forEach(project => {
+          const card = document.createElement('div');
+          card.className = 'skill-dropdown-project';
+
+          const title = document.createElement('h4');
+          title.className = 'skill-dropdown-project-title';
+          title.textContent = project.title;
+          card.appendChild(title);
+
+          const desc = document.createElement('p');
+          desc.className = 'skill-dropdown-project-desc';
+          desc.textContent = project.desc.substring(0, 80) + '...';
+          card.appendChild(desc);
+
+          const link = document.createElement('a');
+          link.className = 'skill-dropdown-project-link';
+          link.href = project.link;
+          link.textContent = project.linkText + ' →';
+          if (project.link !== '#') {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          }
+          card.appendChild(link);
+
+          projectsEl.appendChild(card);
+        });
+      }
+
+      const buttonRect = button.getBoundingClientRect();
+      const parentRect = button.closest('.skill-group').getBoundingClientRect();
+
+      dropdown.style.left = `${buttonRect.left - parentRect.left}px`;
+      dropdown.style.top = `${buttonRect.bottom - parentRect.top + 5}px`;
+
+      dropdown.classList.add('show');
+      currentSkill = slug;
+    }
+
+    function hideDropdown() {
+      dropdown.classList.remove('show');
+      currentSkill = null;
+    }
+
+    document.addEventListener('click', (e) => {
+      const skillBtn = e.target.closest('[data-skill-tag]');
+
+      if (skillBtn) {
+        e.preventDefault();
+        const skillTag = skillBtn.getAttribute('data-skill-tag');
+
+        if (currentSkill === toTagSlug(skillTag)) {
+          hideDropdown();
+        } else {
+          showDropdown(skillTag, skillBtn);
+        }
+        return;
+      }
+
+      if (!dropdown.contains(e.target)) {
+        hideDropdown();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && currentSkill) {
+        hideDropdown();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadProjectsData);
+</script>

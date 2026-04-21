@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Projects">
+  <section id="projects" style="margin-top: 56px;">
+    <div class="container">
+      <h2 class="section-title">All Projects</h2>
+      
+      <div style="margin-top: 2rem; margin-bottom: 1.5rem;">
+        <div class="project-controls" data-project-controls>
+          <div class="filter-summary" data-filter-summary>
+            <span class="summary-text">Showing all projects</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-grid" data-projects-grid>
+        <!-- Projects will be loaded from data/projects.json -->
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  async function loadAllProjects() {
+    try {
+      const response = await fetch('/data/projects.json');
+      if (!response.ok) throw new Error('Failed to load projects');
+      const data = await response.json();
+      const grid = document.querySelector('[data-projects-grid]');
+      
+      if (!grid) return;
+      
+      data.projects.forEach((project) => {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        
+        const title = document.createElement('h3');
+        title.className = 'project-title';
+        title.textContent = project.title;
+        card.appendChild(title);
+        
+        const desc = document.createElement('p');
+        desc.className = 'project-desc';
+        desc.textContent = project.desc;
+        card.appendChild(desc);
+        
+        const link = document.createElement('a');
+        link.className = 'project-link';
+        link.href = project.link || '#';
+        link.textContent = project.linkText + ' →';
+        if (project.link && !project.link.startsWith('#')) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        card.appendChild(link);
+        
+        grid.appendChild(card);
+      });
+    } catch (error) {
+      console.error('Failed to load projects:', error);
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', loadAllProjects);
+</script>
