@@ -23,29 +23,36 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+  interface Project {
+    title: string;
+    desc: string;
+    link?: string;
+    linkText: string;
+  }
+
   async function loadAllProjects() {
     try {
       const response = await fetch('/data/projects.json');
       if (!response.ok) throw new Error('Failed to load projects');
-      const data = await response.json();
+      const data = (await response.json()) as { projects: Project[] };
       const grid = document.querySelector('[data-projects-grid]');
-      
+
       if (!grid) return;
-      
-      data.projects.forEach((project) => {
+
+      data.projects.forEach((project: Project) => {
         const card = document.createElement('article');
         card.className = 'project-card';
-        
+
         const title = document.createElement('h3');
         title.className = 'project-title';
         title.textContent = project.title;
         card.appendChild(title);
-        
+
         const desc = document.createElement('p');
         desc.className = 'project-desc';
         desc.textContent = project.desc;
         card.appendChild(desc);
-        
+
         const link = document.createElement('a');
         link.className = 'project-link';
         link.href = project.link || '#';
@@ -55,13 +62,13 @@ import Layout from '../layouts/Layout.astro';
           link.rel = 'noopener noreferrer';
         }
         card.appendChild(link);
-        
+
         grid.appendChild(card);
       });
     } catch (error) {
       console.error('Failed to load projects:', error);
     }
   }
-  
+
   document.addEventListener('DOMContentLoaded', loadAllProjects);
 </script>

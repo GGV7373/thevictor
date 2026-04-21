@@ -65,7 +65,7 @@
 </section>
 
 <script>
-  function toTagSlug(value) {
+  function toTagSlug(value: string | unknown): string {
     return String(value || '')
       .trim()
       .toLowerCase()
@@ -75,8 +75,8 @@
       .replace(/^-|-$/g, '');
   }
 
-  function tagLabelFromSlug(slug) {
-    const map = {
+  function tagLabelFromSlug(slug: string): string {
+    const map: Record<string, string> = {
       llm: 'LLM',
       'open-source': 'Open Source',
     };
@@ -85,11 +85,11 @@
     return slug
       .split('-')
       .filter(Boolean)
-      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
       .join(' ');
   }
 
-  let PROJECTS_DATA = [];
+  let PROJECTS_DATA: any[] = [];
 
   async function loadProjectsData() {
     try {
@@ -97,7 +97,7 @@
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      const data = (await response.json()) as { projects: any[] };
       PROJECTS_DATA = data.projects;
       initSkillDropdown();
     } catch (error) {
@@ -122,23 +122,23 @@
 
     if (!dropdown || !titleEl || !projectsEl) return;
 
-    let currentSkill = null;
+    let currentSkill: string | null = null;
 
-    function showDropdown(skillTag, button) {
+    function showDropdown(skillTag: string, button: HTMLElement) {
       const slug = toTagSlug(skillTag);
       if (!slug) return;
 
       const matching = PROJECTS_DATA.filter(p => p.tags.includes(slug));
       const label = tagLabelFromSlug(slug);
 
-      titleEl.textContent = `${label} Projects (${matching.length})`;
-      projectsEl.innerHTML = '';
+      titleEl!.textContent = `${label} Projects (${matching.length})`;
+      projectsEl!.innerHTML = '';
 
       if (matching.length === 0) {
         const empty = document.createElement('div');
         empty.className = 'skill-dropdown-empty';
         empty.textContent = 'No projects found for this skill yet.';
-        projectsEl.appendChild(empty);
+        projectsEl!.appendChild(empty);
       } else {
         matching.forEach(project => {
           const card = document.createElement('div');
@@ -164,41 +164,43 @@
           }
           card.appendChild(link);
 
-          projectsEl.appendChild(card);
+          projectsEl!.appendChild(card);
         });
       }
 
       const buttonRect = button.getBoundingClientRect();
-      const parentRect = button.closest('.skill-group').getBoundingClientRect();
+      const skillGroup = button.closest('.skill-group');
+      if (!skillGroup) return;
+      const parentRect = skillGroup.getBoundingClientRect();
 
-      dropdown.style.left = `${buttonRect.left - parentRect.left}px`;
-      dropdown.style.top = `${buttonRect.bottom - parentRect.top + 5}px`;
+      dropdown!.style.left = `${buttonRect.left - parentRect.left}px`;
+      dropdown!.style.top = `${buttonRect.bottom - parentRect.top + 5}px`;
 
-      dropdown.classList.add('show');
+      dropdown!.classList.add('show');
       currentSkill = slug;
     }
 
     function hideDropdown() {
-      dropdown.classList.remove('show');
+      dropdown!.classList.remove('show');
       currentSkill = null;
     }
 
     document.addEventListener('click', (e) => {
-      const skillBtn = e.target.closest('[data-skill-tag]');
+      const skillBtn = (e.target as HTMLElement).closest('[data-skill-tag]');
 
       if (skillBtn) {
         e.preventDefault();
         const skillTag = skillBtn.getAttribute('data-skill-tag');
 
-        if (currentSkill === toTagSlug(skillTag)) {
+        if (currentSkill === toTagSlug(skillTag || '')) {
           hideDropdown();
         } else {
-          showDropdown(skillTag, skillBtn);
+          showDropdown(skillTag || '', skillBtn as HTMLElement);
         }
         return;
       }
 
-      if (!dropdown.contains(e.target)) {
+      if (dropdown && !dropdown.contains(e.target as Node)) {
         hideDropdown();
       }
     });
