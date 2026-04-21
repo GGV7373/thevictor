@@ -45,6 +45,40 @@ a:hover {
   color: var(--color-text);
 }
 
+/* ----- Section Background Images ----- */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/media/backrund/Blomsttree_3.webp') center / cover no-repeat;
+  opacity: 0.08;
+  filter: blur(3px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.projects-page #projects::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/media/backrund/flowers.webp') center / cover no-repeat;
+  opacity: 0.12;
+  filter: blur(2px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contact-page #contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/media/backrund/haakonvii.webp') center / cover no-repeat;
+  opacity: 0.12;
+  filter: blur(2px);
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ----- Navbar ----- */
 #navbar {
   position: fixed;
@@ -241,6 +275,7 @@ section {
   background: var(--color-bg) var(--grid-pattern);
   border-bottom: 2px solid var(--color-grid);
   position: relative;
+  overflow: hidden;
 }
 
 section:nth-child(even) {
