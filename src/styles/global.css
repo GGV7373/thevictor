@@ -231,6 +231,14 @@ a:hover {
   margin-top: 0.25rem;
 }
 
+.hero-desc {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
 .hero-links {
   display: flex;
   gap: 1rem;

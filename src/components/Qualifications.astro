@@ -1,0 +1,129 @@
+---
+---
+
+<section id="qualifications">
+  <div class="container">
+    <h2 class="section-title">Qualifications</h2>
+
+    <div class="qualifications-grid">
+      <div class="qualification-section">
+        <h3 class="qualification-subtitle">What is my earlier work</h3>
+        <p class="qualification-text">Some of my earlier work</p>
+        <div class="qualification-cta">
+          <a href="#" class="btn btn-outline">Reference 1</a>
+          <a href="#" class="btn btn-outline">More here</a>
+        </div>
+      </div>
+
+      <div class="qualification-section">
+        <h3 class="qualification-subtitle">My tech competence</h3>
+        <div class="tech-skills">
+          <span class="tech-skill">python</span>
+          <span class="tech-skill">claude</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="certifications-section">
+      <h3 class="qualification-subtitle">Certifications</h3>
+      <div class="certifications-grid">
+        <div class="certification-card">
+          <h4>Certification 1</h4>
+        </div>
+        <div class="certification-card">
+          <h4>Certification 2</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.qualifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.qualification-section {
+  background: var(--color-surface);
+  border: 2px solid var(--color-grid);
+  padding: 1.5rem;
+  border-radius: 0px;
+}
+
+.qualification-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.qualification-text {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.qualification-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tech-skills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tech-skill {
+  background: var(--color-accent);
+  color: var(--color-text);
+  padding: 0.5rem 1rem;
+  border-radius: 0px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.certifications-section {
+  margin-top: 3rem;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.certification-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-grid);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 0px;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.certification-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.certification-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+@media (max-width: 600px) {
+  .qualifications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certification-card {
+    padding: 1.5rem;
+  }
+}
+</style>
