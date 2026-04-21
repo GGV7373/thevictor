@@ -39,12 +39,8 @@ npm run build
 npm run preview
 ```
 
-## Contact
-
-- Email: thevictor-con@outlook.com
-- LinkedIn: [Victor Husefest](https://www.linkedin.com/in/victor-husefest-6372843aa/)
-- GitHub: [GGV7373](https://github.com/GGV7373)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+MIT License
