@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && wrangler pages dev",
+    "preview": "node scripts/stop-preview-server.mjs && astro build && node scripts/prepare-preview-config.mjs && wrangler dev --config dist/server/wrangler.json",
     "astro": "astro",
     "generate-types": "wrangler types",
     "deploy": "astro build && wrangler pages deploy",
