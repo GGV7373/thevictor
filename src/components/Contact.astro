@@ -1,109 +1,83 @@
 ---
+interface Props {
+  detailed?: boolean;
+}
+
+const { detailed = false } = Astro.props;
 ---
 
 <section id="contact">
   <div class="container">
-    <h1 class="section-title">Get in kontakt</h1>
+    <div class="section-heading">
+      <p class="section-eyebrow">Contact</p>
+      <h2 class="section-title">{detailed ? 'Get in contact' : "Let's Talk"}</h2>
+    </div>
+
     <div class="contact-intro">
-      <div class="contact-github">
-        <h3>My github</h3>
-        <a href="https://github.com/GGV7373" class="btn btn-outline" target="_blank" rel="noopener noreferrer">My github</a>
-      </div>
       <div class="contact-description">
         <p>
-          I'm passionate about building meaningful technology
-          solutions and welcome opportunities to connect with like-
-          minded professionals. Whether you're interested in
-          collaborating on a project, discussing potential
-          opportunities, or exploring ways we can work together - I'd
-          be pleased to hear from you.
+          I'm passionate about building meaningful technology solutions and welcome
+          opportunities to connect with like-minded professionals. Whether you're interested in
+          collaborating on a project, discussing potential opportunities, or exploring ways we
+          can work together, I'd be pleased to hear from you.
         </p>
       </div>
+
+      <div class="info-card contact-side-card">
+        <h3>Direct links</h3>
+        <div class="contact-quick-links">
+          <a href="mailto:thevictor-con@outlook.com" class="contact-item">Email</a>
+          <a href="https://github.com/GGV7373" class="contact-item" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="contact-item" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
     </div>
 
-    <div class="contact-actions">
-      <div class="contact-email">
-        <button class="contact-btn">
-          <a href="mailto:thevictor-con@outlook.com" class="contact-link">Send me a mail</a>
-        </button>
+    {detailed ? (
+      <>
+        <div class="contact-methods">
+          <h3 class="contact-subtitle">I'm interested in:</h3>
+          <div class="interests-grid">
+            <div class="interest-item">Freelance &amp; Contract Work</div>
+            <div class="interest-item">Full-time Opportunities</div>
+            <div class="interest-item">Collaboration Projects</div>
+            <div class="interest-item">Tech Discussions &amp; Ideas</div>
+            <div class="interest-item">General Inquiries</div>
+            <div class="interest-item">Consulting</div>
+          </div>
+        </div>
+
+        <div class="contact-cta-buttons">
+          <a href="mailto:thevictor-con@outlook.com" class="contact-cta-btn">Send me a mail</a>
+          <div class="contact-cta-row">
+            <a href="https://github.com/GGV7373" class="contact-cta-btn" target="_blank" rel="noopener noreferrer">My GitHub</a>
+            <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="contact-cta-btn" target="_blank" rel="noopener noreferrer">My LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="response-info">
+          <h3 class="contact-subtitle">Response times:</h3>
+          <p class="response-text">
+            I aim to respond to all inquiries within 24-48 hours. If you don't receive a response,
+            please feel free to follow up as messages occasionally go undelivered. For time-sensitive
+            matters, LinkedIn may provide the most reliable communication channel.
+          </p>
+        </div>
+
+        <div class="cta-section">
+          <p class="cta-text">
+            I am currently employed by Agder fylkeskommune under a two-year contract. However, I am open
+            to freelance work and collaborations. If you have an interesting project or opportunity in mind,
+            feel free to reach out.
+          </p>
+        </div>
+      </>
+    ) : (
+      <div class="contact-actions">
+        <a href="mailto:thevictor-con@outlook.com" class="btn">Send an Email</a>
+        <a href="https://github.com/GGV7373" class="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-      <div class="contact-linkedin">
-        <button class="contact-btn">
-          <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="contact-link" target="_blank" rel="noopener noreferrer">My linkdin</a>
-        </button>
-      </div>
-    </div>
+    )}
   </div>
 </section>
-
-<style>
-.contact-intro {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.contact-github h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.contact-description p {
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-.contact-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.contact-btn {
-  background: var(--color-accent);
-  border: 2px solid var(--color-accent);
-  color: var(--color-text);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition);
-  border-radius: 0px;
-  min-width: 150px;
-}
-
-.contact-btn:hover {
-  background: transparent;
-  color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.contact-link {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 600;
-  display: block;
-}
-
-@media (max-width: 600px) {
-  .contact-intro {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-</style>

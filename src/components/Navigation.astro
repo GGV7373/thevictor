@@ -1,19 +1,23 @@
 ---
+import logoUrl from '../../thevictor.net.svg';
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
 ---
 
 <nav id="navbar">
   <div class="nav-inner">
     <span class="nav-logo">
       <a href="/">
-        <img src="/logo.webp" loading="lazy" alt="the-victor logo" class="nav-logo-image" />
+        <img src={logoUrl.src} alt="thevictor.net logo" class="nav-logo-image" />
       </a>
     </span>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     <ul class="nav-links">
-      <li><a href="/#about">About</a></li>
+      <li><a href="/#about" class:list={{ active: isHome }}>About</a></li>
       <li><a href="/#qualifications">Qualifications</a></li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><a href="/projects" class:list={{ active: currentPath === '/projects' }}>Projects</a></li>
+      <li><a href="/contact" class:list={{ active: currentPath === '/contact' }}>Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -36,25 +40,25 @@
     });
   }
 
-  // Highlight active nav link on scroll
-  const sections = document.querySelectorAll('section[id]');
-  const navItems = document.querySelectorAll('.nav-links a');
+  if (window.location.pathname === '/') {
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a[href^="/#"]');
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
           navItems.forEach(link => {
             link.classList.toggle(
               'active',
-              link.getAttribute('href') === `#${entry.target.id}`
+              link.getAttribute('href') === `/#${entry.target.id}`
             );
           });
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
+        });
+      },
+      { threshold: 0.4 }
+    );
 
-  sections.forEach(section => observer.observe(section));
+    sections.forEach(section => observer.observe(section));
+  }
 </script>

@@ -2,6 +2,7 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import logoUrl from '../../thevictor.net.svg';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const { title, pageClass = '' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/logo.webp" type="image/png" />
+    <link rel="icon" href={logoUrl} type="image/svg+xml" />
     <title>{title} | the-victor</title>
   </head>
   <body class={pageClass}>
