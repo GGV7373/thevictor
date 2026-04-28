@@ -3,217 +3,202 @@
 
 <section id="qualifications">
   <div class="container">
-    <div class="section-heading">
-      <p class="section-eyebrow">Tech competence</p>
-      <h2 class="section-title">Qualifications</h2>
+    <div class="section-heading qualifications-header">
+      <div>
+        <p class="section-eyebrow">Tech competence</p>
+        <h2 class="section-title">Qualifications</h2>
+      </div>
+      <div id="cv-download-area"></div>
     </div>
-    <div class="skills-list">
-      <!-- Frontend & Languages -->
-      <div class="skill-group">
-        <h3 class="skill-category">Frontend & Languages</h3>
-        <div class="skill-items">
-          <button class="skill-tag" data-skill-tag="html-css">HTML &amp; CSS</button>
-          <button class="skill-tag" data-skill-tag="javascript">JavaScript</button>
-          <button class="skill-tag" data-skill-tag="python">Python</button>
-        </div>
-        <div class="skill-dropdown" id="skill-dropdown">
-          <div class="skill-dropdown-header" id="skill-dropdown-title"></div>
-          <div class="skill-dropdown-projects" id="skill-dropdown-projects"></div>
-          <div class="skill-dropdown-footer">
-            <a href="/projects" class="btn btn-outline">See all projects &rarr;</a>
-          </div>
-        </div>
-      </div>
 
-      <!-- Backend & Infrastructure -->
-      <div class="skill-group">
-        <h3 class="skill-category">Backend & Infrastructure</h3>
-        <div class="skill-items">
-          <button class="skill-tag" data-skill-tag="mysql">Database Management (MySQL)</button>
-          <button class="skill-tag" data-skill-tag="ubuntu">Linux server (Ubuntu)</button>
-          <button class="skill-tag" data-skill-tag="docker">Docker</button>
-        </div>
-      </div>
-
-      <!-- Cloud & DevOps -->
-      <div class="skill-group">
-        <h3 class="skill-category">Cloud & DevOps</h3>
-        <div class="skill-items">
-          <button class="skill-tag" data-skill-tag="cloudflare">Cloud Services (Cloudflare)</button>
-          <button class="skill-tag" data-skill-tag="networking">TCP/IP and Networking</button>
-          <button class="skill-tag" data-skill-tag="automation">Automation &amp; Scripting</button>
-        </div>
-      </div>
-
-      <!-- AI & ML -->
-      <div class="skill-group">
-        <h3 class="skill-category">AI & ML</h3>
-        <div class="skill-items">
-          <button class="skill-tag" data-skill-tag="llm">AI local and cloud integration</button>
-        </div>
-      </div>
-
-      <!-- Tools & Soft Skills -->
-      <div class="skill-group">
-        <h3 class="skill-category">Tools &amp; Soft Skills</h3>
-        <div class="skill-items">
-          <button class="skill-tag" data-skill-tag="git">Git &amp; GitHub</button>
-          <button class="skill-tag" data-skill-tag="problem-solving">Problem Solving</button>
-          <button class="skill-tag" data-skill-tag="team-collaboration">Team Collaboration</button>
-          <button class="skill-tag" data-skill-tag="project-management">Project Management</button>
-        </div>
-      </div>
+    <div id="qualifications-content">
+      <div class="skills-list" id="skills-list"></div>
+      <div id="certifications-area"></div>
     </div>
   </div>
 </section>
 
+<style>
+  .qualifications-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .certifications-section {
+    margin-top: 2.5rem;
+  }
+
+  .certifications-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .certification-card {
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 0.22s ease, border-color 0.22s ease;
+  }
+
+  .certification-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .certification-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-text);
+  }
+
+  .certification-meta {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+
+  .certification-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: auto;
+  }
+
+  .certification-link:hover {
+    text-decoration: underline;
+  }
+
+  .no-certifications {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    padding: 1rem 0;
+  }
+</style>
+
 <script>
-  function toTagSlug(value: string | unknown): string {
-    return String(value || '')
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
+  interface QualificationsData {
+    cv?: { label: string; file: string };
+    categories: { name: string; skills: string[] }[];
+    certifications: { title: string; issuer?: string; date?: string; file?: string }[];
   }
 
-  function tagLabelFromSlug(slug: string): string {
-    const map: Record<string, string> = {
-      llm: 'LLM',
-      'open-source': 'Open Source',
-    };
-    if (map[slug]) return map[slug];
+  async function loadQualifications() {
+    let data: QualificationsData = { categories: [], certifications: [] };
 
-    return slug
-      .split('-')
-      .filter(Boolean)
-      .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(' ');
-  }
-
-  let PROJECTS_DATA: any[] = [];
-
-  async function loadProjectsData() {
     try {
-      const response = await fetch('/data/projects.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = (await response.json()) as { projects: any[] };
-      PROJECTS_DATA = data.projects;
-      initSkillDropdown();
-    } catch (error) {
-      console.error('Failed to load projects data:', error);
-      PROJECTS_DATA = [
-        {
-          title: 'Bibel Ollama',
-          desc: 'A Bible study tool that leverages an LLM to provide insights and interpretations.',
-          tags: ['llm', 'python'],
-          link: 'https://github.com/GGV7373/Bible-Ollama',
-          linkText: 'View on GitHub',
-        }
-      ];
-      initSkillDropdown();
+      const res = await fetch('/data/qualifications.json');
+      if (res.ok) data = await res.json();
+    } catch {}
+
+    // CV download button
+    const cvArea = document.getElementById('cv-download-area');
+    if (cvArea && data.cv?.file) {
+      const link = document.createElement('a');
+      link.href = data.cv.file;
+      link.className = 'btn';
+      link.textContent = data.cv.label || 'Download CV';
+      link.setAttribute('download', '');
+      cvArea.appendChild(link);
     }
-  }
 
-  function initSkillDropdown() {
-    const dropdown = document.getElementById('skill-dropdown');
-    const titleEl = document.getElementById('skill-dropdown-title');
-    const projectsEl = document.getElementById('skill-dropdown-projects');
+    // Skills list
+    const skillsList = document.getElementById('skills-list');
+    if (skillsList) {
+      data.categories.forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'skill-group';
 
-    if (!dropdown || !titleEl || !projectsEl) return;
+        const heading = document.createElement('h3');
+        heading.className = 'skill-category';
+        heading.textContent = cat.name;
+        group.appendChild(heading);
 
-    let currentSkill: string | null = null;
-
-    function showDropdown(skillTag: string, button: HTMLElement) {
-      const slug = toTagSlug(skillTag);
-      if (!slug) return;
-
-      const matching = PROJECTS_DATA.filter(p => p.tags.includes(slug));
-      const label = tagLabelFromSlug(slug);
-
-      titleEl!.textContent = `${label} Projects (${matching.length})`;
-      projectsEl!.innerHTML = '';
-
-      if (matching.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'skill-dropdown-empty';
-        empty.textContent = 'No projects found for this skill yet.';
-        projectsEl!.appendChild(empty);
-      } else {
-        matching.forEach(project => {
-          const card = document.createElement('div');
-          card.className = 'skill-dropdown-project';
-
-          const title = document.createElement('h4');
-          title.className = 'skill-dropdown-project-title';
-          title.textContent = project.title;
-          card.appendChild(title);
-
-          const desc = document.createElement('p');
-          desc.className = 'skill-dropdown-project-desc';
-          desc.textContent = project.desc.substring(0, 80) + '...';
-          card.appendChild(desc);
-
-          const link = document.createElement('a');
-          link.className = 'skill-dropdown-project-link';
-          link.href = project.link;
-          link.textContent = project.linkText + ' →';
-          if (project.link !== '#') {
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-          }
-          card.appendChild(link);
-
-          projectsEl!.appendChild(card);
+        const items = document.createElement('div');
+        items.className = 'skill-items';
+        cat.skills.forEach(skill => {
+          const tag = document.createElement('span');
+          tag.className = 'skill-tag';
+          tag.textContent = skill;
+          items.appendChild(tag);
         });
-      }
-
-      const buttonRect = button.getBoundingClientRect();
-      const skillGroup = button.closest('.skill-group');
-      if (!skillGroup) return;
-      const parentRect = skillGroup.getBoundingClientRect();
-
-      dropdown!.style.left = `${buttonRect.left - parentRect.left}px`;
-      dropdown!.style.top = `${buttonRect.bottom - parentRect.top + 5}px`;
-
-      dropdown!.classList.add('show');
-      currentSkill = slug;
+        group.appendChild(items);
+        skillsList.appendChild(group);
+      });
     }
 
-    function hideDropdown() {
-      dropdown!.classList.remove('show');
-      currentSkill = null;
-    }
+    // Certifications
+    const certArea = document.getElementById('certifications-area');
+    if (!certArea) return;
 
-    document.addEventListener('click', (e) => {
-      const skillBtn = (e.target as HTMLElement).closest('[data-skill-tag]');
+    const section = document.createElement('div');
+    section.className = 'certifications-section';
 
-      if (skillBtn) {
-        e.preventDefault();
-        const skillTag = skillBtn.getAttribute('data-skill-tag');
+    const heading = document.createElement('h3');
+    heading.className = 'certifications-heading';
+    heading.textContent = 'Certifications';
+    section.appendChild(heading);
 
-        if (currentSkill === toTagSlug(skillTag || '')) {
-          hideDropdown();
-        } else {
-          showDropdown(skillTag || '', skillBtn as HTMLElement);
+    if (!data.certifications || data.certifications.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'no-certifications';
+      empty.textContent = 'No certifications added yet.';
+      section.appendChild(empty);
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'certifications-grid';
+
+      data.certifications.forEach(cert => {
+        const card = document.createElement('div');
+        card.className = 'certification-card';
+
+        const title = document.createElement('p');
+        title.className = 'certification-title';
+        title.textContent = cert.title;
+        card.appendChild(title);
+
+        if (cert.issuer || cert.date) {
+          const meta = document.createElement('p');
+          meta.className = 'certification-meta';
+          meta.textContent = [cert.issuer, cert.date].filter(Boolean).join(' · ');
+          card.appendChild(meta);
         }
-        return;
-      }
 
-      if (dropdown && !dropdown.contains(e.target as Node)) {
-        hideDropdown();
-      }
-    });
+        if (cert.file) {
+          const link = document.createElement('a');
+          link.className = 'certification-link';
+          link.href = cert.file;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = 'View certificate →';
+          card.appendChild(link);
+        }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && currentSkill) {
-        hideDropdown();
-      }
-    });
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+    }
+
+    certArea.appendChild(section);
   }
 
-  document.addEventListener('DOMContentLoaded', loadProjectsData);
+  document.addEventListener('DOMContentLoaded', loadQualifications);
 </script>

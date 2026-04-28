@@ -1,6 +1,4 @@
 ---
-import logoUrl from '../../thevictor.net.svg';
-
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === '/';
 ---
@@ -9,13 +7,13 @@ const isHome = currentPath === '/';
   <div class="nav-inner">
     <span class="nav-logo">
       <a href="/">
-        <img src={logoUrl.src} alt="thevictor.net logo" class="nav-logo-image" />
+        <img src="/logo.webp" alt="thevictor.net logo" class="nav-logo-image" />
       </a>
     </span>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     <ul class="nav-links">
       <li><a href="/#about" class:list={{ active: isHome }}>About</a></li>
-      <li><a href="/#qualifications">Qualifications</a></li>
+      <li><a href="/qualifications" class:list={{ active: currentPath === '/qualifications' }}>Qualifications</a></li>
       <li><a href="/projects" class:list={{ active: currentPath === '/projects' }}>Projects</a></li>
       <li><a href="/contact" class:list={{ active: currentPath === '/contact' }}>Contact</a></li>
     </ul>

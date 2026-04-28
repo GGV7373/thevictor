@@ -1,16 +1,244 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import FeaturedProjects from '../components/FeaturedProjects.astro';
-import Contact from '../components/Contact.astro';
 ---
 
 <Layout title="Home">
   <Hero />
-  <About />
-  <Skills />
-  <FeaturedProjects />
-  <Contact />
+
+  <section id="home-nav">
+    <div class="container">
+      <div class="home-nav-grid">
+
+        <a href="/#about-home" class="home-nav-card scroll-to">
+          <span class="home-nav-eyebrow">Who I am</span>
+          <h2 class="home-nav-title">About</h2>
+          <p class="home-nav-desc">
+            IT student in Norway on the path to becoming an IT operations technician.
+            I enjoy building things and solving real problems.
+          </p>
+          <span class="home-nav-arrow">&darr;</span>
+        </a>
+
+        <a href="/qualifications" class="home-nav-card">
+          <span class="home-nav-eyebrow">Tech competence</span>
+          <h2 class="home-nav-title">Qualifications</h2>
+          <p class="home-nav-desc">
+            Python, JavaScript, HTML &amp; CSS, Cloudflare, TCP/IP, Linux, Docker,
+            AI integration and more.
+          </p>
+          <span class="home-nav-arrow">&rarr;</span>
+        </a>
+
+        <a href="/projects" class="home-nav-card">
+          <span class="home-nav-eyebrow">Selected work</span>
+          <h2 class="home-nav-title">Projects</h2>
+          <p class="home-nav-desc">
+            Bibel Ollama, personal portfolio, aiawards.no, web scrapers and more —
+            see everything I've built.
+          </p>
+          <span class="home-nav-arrow">&rarr;</span>
+        </a>
+
+        <a href="/contact" class="home-nav-card">
+          <span class="home-nav-eyebrow">Get in touch</span>
+          <h2 class="home-nav-title">Contact</h2>
+          <p class="home-nav-desc">
+            Open to collaboration, freelance work, and new opportunities.
+            I'm always happy to hear from you.
+          </p>
+          <span class="home-nav-arrow">&rarr;</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="about-home">
+    <div class="container about-home-layout">
+      <div class="about-home-text">
+        <p class="section-eyebrow">About me</p>
+        <h2 class="section-title">Hi, I'm Victor</h2>
+        <p class="section-text">
+          I am currently studying IT at Tangen videregående skole in Norway, and I am going
+          to take the IT operations technician program to get a trade certificate.
+        </p>
+        <p class="section-text">
+          I have a passion for technology and enjoy building projects that solve real-world
+          problems. I am always eager to learn new skills and take on new challenges.
+        </p>
+        <div class="about-home-links">
+          <a href="/qualifications" class="btn btn-outline">Qualifications &rarr;</a>
+          <a href="/projects" class="btn btn-outline">Projects &rarr;</a>
+        </div>
+      </div>
+      <div class="about-home-facts">
+        <div class="about-fact">
+          <span class="about-fact-label">Based in</span>
+          <strong>Norway</strong>
+        </div>
+        <div class="about-fact">
+          <span class="about-fact-label">Focus</span>
+          <strong>Web, Cloudflare, AI</strong>
+        </div>
+        <div class="about-fact">
+          <span class="about-fact-label">Current path</span>
+          <strong>IT operations technician</strong>
+        </div>
+        <div class="about-fact">
+          <span class="about-fact-label">Employer</span>
+          <strong>Agder fylkeskommune</strong>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* ── HOME NAV GRID ── */
+  #home-nav {
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .home-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .home-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.8rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    cursor: pointer;
+  }
+
+  .home-nav-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(91, 216, 234, 0.3);
+    background: rgba(91, 216, 234, 0.04);
+  }
+
+  .home-nav-eyebrow {
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .home-nav-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .home-nav-desc {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .home-nav-arrow {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-top: 0.5rem;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  .home-nav-card:hover .home-nav-arrow {
+    transform: translateX(4px);
+  }
+
+  .home-nav-card[href^="/#"]:hover .home-nav-arrow {
+    transform: translateY(4px) translateX(0);
+  }
+
+  /* ── ABOUT HOME ── */
+  #about-home {
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .about-home-layout {
+    display: grid;
+    grid-template-columns: 1fr minmax(200px, 280px);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-home-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about-home-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .about-home-facts {
+    display: grid;
+    gap: 0;
+  }
+
+  .about-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .about-fact:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .about-fact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    font-weight: 700;
+  }
+
+  .about-fact strong {
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 700px) {
+    .home-nav-grid,
+    .about-home-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('a.scroll-to').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (!href?.startsWith('/#')) return;
+      const id = href.slice(2);
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

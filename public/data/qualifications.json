@@ -1,0 +1,29 @@
+{
+  "cv": {
+    "label": "Download CV",
+    "file": "/data/qualifications/cv.pdf"
+  },
+  "categories": [
+    {
+      "name": "Frontend & Languages",
+      "skills": ["HTML & CSS", "JavaScript", "Python"]
+    },
+    {
+      "name": "Backend & Infrastructure",
+      "skills": ["Database Management (MySQL)", "Linux server (Ubuntu)", "Docker", "Windows Server"]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "skills": ["Cloud Services (Cloudflare)", "TCP/IP and Networking", "Automation & Scripting", "GitHub Actions"]
+    },
+    {
+      "name": "AI & ML",
+      "skills": ["AI local and cloud integration"]
+    },
+    {
+      "name": "Tools & Soft Skills",
+      "skills": ["Git & GitHub", "Problem Solving", "Team Collaboration", "Project Management"]
+    }
+  ],
+  "certifications": []
+}
