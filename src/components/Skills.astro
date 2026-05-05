@@ -1,3 +1,486 @@
+<section id="qualifications">
+  <div class="container">
+    <div class="section-heading qualifications-header">
+      <div>
+        <p class="section-eyebrow">Tech competence</p>
+        <h2 class="section-title">Qualifications</h2>
+      </div>
+      <div id="cv-download-area"></div>
+    </div>
+
+    <div id="qualifications-content">
+      <div class="skills-list" id="skills-list"></div>
+      <div id="certifications-area"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .qualifications-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .certifications-section {
+    margin-top: 2.5rem;
+  }
+
+  .certifications-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .certification-card {
+    background:
+      linear-gradient(180deg, rgba(79, 142, 247, 0.08), rgba(79, 142, 247, 0) 34%),
+      var(--color-surface);
+    border: 1px solid rgba(79, 142, 247, 0.18);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 100%;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(4, 10, 18, 0.22);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .certification-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79, 142, 247, 0.34);
+    box-shadow: 0 22px 44px rgba(4, 10, 18, 0.32);
+  }
+
+  .certification-card.is-active {
+    border-color: rgba(79, 142, 247, 0.52);
+    box-shadow: 0 0 0 1px rgba(79, 142, 247, 0.24), 0 22px 44px rgba(4, 10, 18, 0.32);
+  }
+
+  .certification-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(79, 142, 247, 0.14);
+    border: 1px solid rgba(79, 142, 247, 0.22);
+    color: #b7d0ff;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .certification-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.35;
+  }
+
+  .certification-meta {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+  }
+
+  .certification-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: auto;
+  }
+
+  .certification-button {
+    min-height: 40px;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(79, 142, 247, 0.22);
+    background: rgba(79, 142, 247, 0.08);
+    color: var(--color-text);
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+  }
+
+  .certification-button:hover,
+  .certification-button.is-active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface-strong);
+  }
+
+  .certification-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 40px;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .certification-link:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .certification-preview {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    border-radius: 24px;
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    background:
+      radial-gradient(circle at top left, rgba(79, 142, 247, 0.16), transparent 32%),
+      var(--color-surface-strong);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .certification-preview-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .certification-preview-kicker {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .certification-preview-title {
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .certification-preview-meta {
+    margin-top: 0.35rem;
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+  }
+
+  .certification-preview-frame {
+    width: 100%;
+    min-height: 640px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: #0a0f16;
+    overflow: hidden;
+  }
+
+  .certification-preview-frame iframe {
+    width: 100%;
+    height: 640px;
+    border: 0;
+    display: block;
+  }
+
+  .certification-preview-note {
+    margin-top: 0.85rem;
+    color: var(--color-muted);
+    font-size: 0.82rem;
+  }
+
+  .no-certifications {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    padding: 1rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .qualifications-header {
+      align-items: flex-start;
+    }
+
+    .certification-preview-header {
+      flex-direction: column;
+    }
+
+    .certification-preview-frame,
+    .certification-preview-frame iframe {
+      min-height: 420px;
+      height: 420px;
+    }
+
+    .certification-card {
+      padding: 1.2rem;
+    }
+  }
+</style>
+
+<script>
+  interface CertificationItem {
+    title: string;
+    issuer?: string;
+    date?: string;
+    file?: string;
+  }
+
+  interface QualificationsData {
+    cv?: { label: string; file: string };
+    categories: { name: string; skills: string[] }[];
+    certifications: CertificationItem[];
+  }
+
+  interface RawCertificationItem {
+    title?: string;
+    Title?: string;
+    issuer?: string;
+    Issuer?: string;
+    date?: string;
+    Date?: string;
+    file?: string;
+    File?: string;
+  }
+
+  function normalizeCertifications(items: RawCertificationItem[] = []): CertificationItem[] {
+    return items
+      .map(item => ({
+        title: item.title || item.Title || '',
+        issuer: item.issuer || item.Issuer || '',
+        date: item.date || item.Date || '',
+        file: item.file || item.File || ''
+      }))
+      .filter(item => item.title);
+  }
+
+  function createPreviewSection(section: HTMLDivElement, cert: CertificationItem) {
+    const preview = document.createElement('div');
+    preview.className = 'certification-preview';
+
+    const header = document.createElement('div');
+    header.className = 'certification-preview-header';
+
+    const content = document.createElement('div');
+
+    const kicker = document.createElement('span');
+    kicker.className = 'certification-preview-kicker';
+    kicker.textContent = 'PDF preview';
+    content.appendChild(kicker);
+
+    const title = document.createElement('h4');
+    title.className = 'certification-preview-title';
+    title.textContent = cert.title;
+    content.appendChild(title);
+
+    if (cert.issuer || cert.date) {
+      const meta = document.createElement('p');
+      meta.className = 'certification-preview-meta';
+      meta.textContent = [cert.issuer, cert.date].filter(Boolean).join(' · ');
+      content.appendChild(meta);
+    }
+
+    header.appendChild(content);
+
+    if (cert.file) {
+      const openLink = document.createElement('a');
+      openLink.className = 'certification-link';
+      openLink.href = cert.file;
+      openLink.target = '_blank';
+      openLink.rel = 'noopener noreferrer';
+      openLink.textContent = 'Open PDF in new tab';
+      header.appendChild(openLink);
+    }
+
+    preview.appendChild(header);
+
+    const frame = document.createElement('div');
+    frame.className = 'certification-preview-frame';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = cert.file || '';
+    iframe.title = `${cert.title} PDF preview`;
+    iframe.loading = 'lazy';
+    frame.appendChild(iframe);
+    preview.appendChild(frame);
+
+    const note = document.createElement('p');
+    note.className = 'certification-preview-note';
+    note.textContent = 'If the preview does not load in your browser, use the open button to view the PDF directly.';
+    preview.appendChild(note);
+
+    section.appendChild(preview);
+  }
+
+  async function loadQualifications() {
+    let data: QualificationsData = { categories: [], certifications: [] };
+
+    try {
+      const res = await fetch('/data/qualifications.json');
+      if (res.ok) {
+        const rawData = (await res.json()) as {
+          cv?: QualificationsData['cv'];
+          categories?: QualificationsData['categories'];
+          certifications?: RawCertificationItem[];
+        };
+        data = {
+          cv: rawData.cv,
+          categories: rawData.categories || [],
+          certifications: normalizeCertifications(rawData.certifications)
+        };
+      }
+    } catch {}
+
+    const cvArea = document.getElementById('cv-download-area');
+    if (cvArea && data.cv?.file) {
+      const link = document.createElement('a');
+      link.href = data.cv.file;
+      link.className = 'btn';
+      link.textContent = data.cv.label || 'Download CV';
+      link.setAttribute('download', '');
+      cvArea.appendChild(link);
+    }
+
+    const skillsList = document.getElementById('skills-list');
+    if (skillsList) {
+      data.categories.forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'skill-group';
+
+        const heading = document.createElement('h3');
+        heading.className = 'skill-category';
+        heading.textContent = cat.name;
+        group.appendChild(heading);
+
+        const items = document.createElement('div');
+        items.className = 'skill-items';
+        cat.skills.forEach(skill => {
+          const tag = document.createElement('span');
+          tag.className = 'skill-tag';
+          tag.textContent = skill;
+          items.appendChild(tag);
+        });
+        group.appendChild(items);
+        skillsList.appendChild(group);
+      });
+    }
+
+    const certArea = document.getElementById('certifications-area');
+    if (!certArea) return;
+
+    const section = document.createElement('div');
+    section.className = 'certifications-section';
+
+    const heading = document.createElement('h3');
+    heading.className = 'certifications-heading';
+    heading.textContent = 'Certifications';
+    section.appendChild(heading);
+
+    if (!data.certifications || data.certifications.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'no-certifications';
+      empty.textContent = 'No certifications added yet.';
+      section.appendChild(empty);
+    } else {
+      const grid = document.createElement('div');
+      grid.className = 'certifications-grid';
+
+      const previewableCertifications = data.certifications.filter(cert => cert.file);
+      let activeFile = previewableCertifications[0]?.file || '';
+
+      const updatePreview = (selectedCert: CertificationItem) => {
+        if (!selectedCert.file) return;
+
+        activeFile = selectedCert.file;
+        section.querySelector('.certification-preview')?.remove();
+        createPreviewSection(section, selectedCert);
+
+        grid.querySelectorAll('.certification-card').forEach(card => {
+          card.classList.toggle('is-active', card.getAttribute('data-file') === activeFile);
+        });
+
+        grid.querySelectorAll('.certification-button').forEach(button => {
+          button.classList.toggle('is-active', button.getAttribute('data-file') === activeFile);
+        });
+      };
+
+      data.certifications.forEach(cert => {
+        const card = document.createElement('div');
+        card.className = 'certification-card';
+        if (cert.file) {
+          card.setAttribute('data-file', cert.file);
+        }
+
+        const badge = document.createElement('span');
+        badge.className = 'certification-badge';
+        badge.textContent = 'Certificate';
+        card.appendChild(badge);
+
+        const title = document.createElement('p');
+        title.className = 'certification-title';
+        title.textContent = cert.title;
+        card.appendChild(title);
+
+        if (cert.issuer || cert.date) {
+          const meta = document.createElement('p');
+          meta.className = 'certification-meta';
+          meta.textContent = [cert.issuer, cert.date].filter(Boolean).join(' · ');
+          card.appendChild(meta);
+        }
+
+        if (cert.file) {
+          const actions = document.createElement('div');
+          actions.className = 'certification-actions';
+
+          const button = document.createElement('button');
+          button.className = 'certification-button';
+          button.type = 'button';
+          button.textContent = 'Preview on page';
+          button.setAttribute('data-file', cert.file);
+          button.addEventListener('click', () => updatePreview(cert));
+          actions.appendChild(button);
+
+          const link = document.createElement('a');
+          link.className = 'certification-link';
+          link.href = cert.file;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = 'Open PDF';
+          actions.appendChild(link);
+
+          card.appendChild(actions);
+        }
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+
+      if (previewableCertifications.length > 0) {
+        updatePreview(previewableCertifications[0]);
+      }
+    }
+
+    certArea.appendChild(section);
+  }
+
+  document.addEventListener('DOMContentLoaded', loadQualifications);
+</script>
 ---
 ---
 

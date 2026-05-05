@@ -1,7 +1,7 @@
 {
   "cv": {
     "label": "Download CV",
-    "file": "/data/qualifications/cv.pdf"
+    "file": "/data/qualifications/Victor_cv.pdf"
   },
   "categories": [
     {
@@ -23,7 +23,12 @@
     {
       "name": "Tools & Soft Skills",
       "skills": ["Git & GitHub", "Problem Solving", "Team Collaboration", "Project Management"]
+    },
+    {
+      "name": "Frameworks",
+      "skills": ["Dijango", "Flask", "Ecspress.js"]
     }
   ],
-  "certifications": []
+  "certifications": [
+  ]
 }

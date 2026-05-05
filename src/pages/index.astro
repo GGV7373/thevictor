@@ -1,24 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
 ---
 
 <Layout title="Home">
   <Hero />
+  
+  <About />
 
   <section id="home-nav">
     <div class="container">
       <div class="home-nav-grid">
-
-        <a href="/#about-home" class="home-nav-card scroll-to">
-          <span class="home-nav-eyebrow">Who I am</span>
-          <h2 class="home-nav-title">About</h2>
-          <p class="home-nav-desc">
-            IT student in Norway on the path to becoming an IT operations technician.
-            I enjoy building things and solving real problems.
-          </p>
-          <span class="home-nav-arrow">&darr;</span>
-        </a>
 
         <a href="/qualifications" class="home-nav-card">
           <span class="home-nav-eyebrow">Tech competence</span>
@@ -50,45 +43,6 @@ import Hero from '../components/Hero.astro';
           <span class="home-nav-arrow">&rarr;</span>
         </a>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="about-home">
-    <div class="container about-home-layout">
-      <div class="about-home-text">
-        <p class="section-eyebrow">About me</p>
-        <h2 class="section-title">Hi, I'm Victor</h2>
-        <p class="section-text">
-          I am currently studying IT at Tangen videregående skole in Norway, and I am going
-          to take the IT operations technician program to get a trade certificate.
-        </p>
-        <p class="section-text">
-          I have a passion for technology and enjoy building projects that solve real-world
-          problems. I am always eager to learn new skills and take on new challenges.
-        </p>
-        <div class="about-home-links">
-          <a href="/qualifications" class="btn btn-outline">Qualifications &rarr;</a>
-          <a href="/projects" class="btn btn-outline">Projects &rarr;</a>
-        </div>
-      </div>
-      <div class="about-home-facts">
-        <div class="about-fact">
-          <span class="about-fact-label">Based in</span>
-          <strong>Norway</strong>
-        </div>
-        <div class="about-fact">
-          <span class="about-fact-label">Focus</span>
-          <strong>Web, Cloudflare, AI</strong>
-        </div>
-        <div class="about-fact">
-          <span class="about-fact-label">Current path</span>
-          <strong>IT operations technician</strong>
-        </div>
-        <div class="about-fact">
-          <span class="about-fact-label">Employer</span>
-          <strong>Agder fylkeskommune</strong>
-        </div>
       </div>
     </div>
   </section>
