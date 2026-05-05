@@ -1,0 +1,39 @@
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Hero entrance — staggered */
+.hero-bubble-wrap { animation: scaleIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both; }
+.hero-kicker      { animation: fadeUp 0.5s ease 0.35s both; }
+.hero-name        { animation: fadeUp 0.6s ease 0.5s both; }
+.hero-tagline     { animation: fadeUp 0.5s ease 0.65s both; }
+.hero-desc        { animation: fadeUp 0.5s ease 0.75s both; }
+.hero-actions     { animation: fadeUp 0.5s ease 0.9s both; }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-bubble-wrap,
+  .hero-kicker,
+  .hero-name,
+  .hero-tagline,
+  .hero-desc,
+  .hero-actions { animation: none; }
+}

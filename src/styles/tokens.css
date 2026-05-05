@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #0C1018;
+  --color-surface: #141B26;
+  --color-surface-strong: #070C12;
+  --color-grid: #1A2130;
+  --color-border: rgba(79, 142, 247, 0.15);
+  --color-text: #E8EDF5;
+  --color-text-secondary: rgba(232, 237, 245, 0.62);
+  --color-muted: rgba(232, 237, 245, 0.38);
+  --color-accent: #4F8EF7;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --max-width: 1120px;
+  --transition: 0.22s ease;
+  --section-padding: clamp(4rem, 7vw, 6rem);
+}
