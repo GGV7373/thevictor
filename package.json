@@ -8,19 +8,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "node scripts/stop-preview-server.mjs && astro build && node scripts/prepare-preview-config.mjs && wrangler dev --config dist/server/wrangler.json",
-    "astro": "astro",
-    "generate-types": "wrangler types",
-    "deploy": "astro build && wrangler pages deploy",
-    "cf-typegen": "wrangler types"
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.1.10",
     "astro": "^6.1.8"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0",
-    "wrangler": "^4.84.0"
+    "@types/node": "^25.6.0"
   },
   "overrides": {
     "vite": "^7"
