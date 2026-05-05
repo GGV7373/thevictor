@@ -1,8 +1,4 @@
 {
-  "cv": {
-    "label": "Download CV",
-    "file": "/data/qualifications/Victor_cv.pdf"
-  },
   "categories": [
     {
       "name": "Frontend & Languages",
