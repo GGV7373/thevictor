@@ -29,7 +29,11 @@
       "linkText": "View on GitHub"
     },
     {
-      
+      "title": "Ollama Mails",
+      "desc": "An local email generator that uses an LLM to create personalized email content based on user input and preferences. Just like a online llm but bether privacy for sensitive content.",
+      "tags": ["python", "automation", "llm"],
+      "link": "https://github.com/GGV7373/ollama-mails",
+      "linkText": "View on GitHub"
     }
   ]
 }
