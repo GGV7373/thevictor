@@ -7,17 +7,32 @@
 }
 
 :root {
-  --color-bg: #0C1018;
-  --color-surface: #141B26;
-  --color-surface-strong: #070C12;
-  --color-grid: #1A2130;
+  --color-bg: #151E2E;
+  --color-surface: #1D2840;
+  --color-surface-strong: #0F1824;
+  --color-grid: #232F45;
   --color-border: rgba(79, 142, 247, 0.15);
-  --color-text: #E8EDF5;
-  --color-text-secondary: rgba(232, 237, 245, 0.62);
-  --color-muted: rgba(232, 237, 245, 0.38);
+  --color-text: #F5F8FF;
+  --color-text-secondary: rgba(245, 248, 255, 0.82);
+  --color-muted: rgba(245, 248, 255, 0.58);
   --color-accent: #4F8EF7;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --max-width: 1120px;
   --transition: 0.22s ease;
   --section-padding: clamp(4rem, 7vw, 6rem);
+
+  /* Semi-transparent overlay tokens (white-alpha) */
+  --wa-ghost:  rgba(255,255,255, 0.03);
+  --wa-faint:  rgba(255,255,255, 0.05);
+  --wa-hair:   rgba(255,255,255, 0.06);
+  --wa-soft:   rgba(255,255,255, 0.08);
+  --wa-medium: rgba(255,255,255, 0.12);
+  --wa-frame:  rgba(255,255,255, 0.15);
+  --wa-edge:   rgba(255,255,255, 0.20);
+  --wa-trim:   rgba(255,255,255, 0.25);
+  --wa-focus:  rgba(255,255,255, 0.30);
+  --wa-hover:  rgba(255,255,255, 0.40);
+  --wa-bright: rgba(255,255,255, 0.50);
 }
+
+

@@ -27,7 +27,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--wa-soft);
   background: var(--color-surface-strong);
 }
 
@@ -75,7 +75,7 @@ img {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--wa-soft);
 }
 
 .nav-toggle {
@@ -93,7 +93,7 @@ img {
 section {
   position: relative;
   padding: var(--section-padding) 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--wa-hair);
 }
 
 .container {
@@ -163,11 +163,11 @@ section {
 .btn-outline {
   background: transparent;
   color: var(--color-text-secondary);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--wa-focus);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--wa-soft);
   color: var(--color-text);
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: var(--wa-bright);
 }
