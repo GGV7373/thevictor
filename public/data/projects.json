@@ -1,5 +1,6 @@
 {
-  "projects": [
+  "projects": 
+  [
     {
       "title": "Bibel Ollama",
       "desc": "A Bible study tool that leverages an LLM to provide insights and interpretations.",

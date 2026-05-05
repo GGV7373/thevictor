@@ -6,6 +6,13 @@ interface Project {
   linkText: string;
 }
 
+declare global {
+  interface Window {
+    __PROJECTS_DATA__?: Project[];
+    __PROJECTS_INITIALIZED__?: boolean;
+  }
+}
+
 function labelFromTag(tag: string) {
   const labels: Record<string, string> = {
     llm: 'LLM',
@@ -112,14 +119,19 @@ function renderProjects(query: string = '') {
 }
 
 async function loadAllProjects() {
-  try {
-    const response = await fetch('/data/projects.json');
-    if (!response.ok) throw new Error('Failed to load projects');
-    const data = (await response.json()) as { projects: Project[] };
-    allProjects = data.projects;
-  } catch {
-    allProjects = [];
+  if (window.__PROJECTS_DATA__?.length) {
+    allProjects = window.__PROJECTS_DATA__;
+  } else {
+    try {
+      const response = await fetch('/data/projects.json');
+      if (!response.ok) throw new Error('Failed to load projects');
+      const data = (await response.json()) as { projects: Project[] };
+      allProjects = data.projects;
+    } catch {
+      allProjects = [];
+    }
   }
+
   renderProjects();
 
   const searchInput = document.getElementById('projects-search-input') as HTMLInputElement | null;
@@ -128,4 +140,16 @@ async function loadAllProjects() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadAllProjects);
+function initProjects() {
+  if (window.__PROJECTS_INITIALIZED__) return;
+  window.__PROJECTS_INITIALIZED__ = true;
+  void loadAllProjects();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProjects, { once: true });
+} else {
+  initProjects();
+}
+
+document.addEventListener('astro:page-load', initProjects);

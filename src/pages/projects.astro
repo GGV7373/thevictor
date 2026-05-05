@@ -1,5 +1,18 @@
 ---
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import Layout from '../layouts/Layout.astro';
+
+interface Project {
+  title: string;
+  desc: string;
+  tags?: string[];
+  link?: string;
+  linkText: string;
+}
+
+const projectsFile = resolve(process.cwd(), 'public', 'data', 'projects.json');
+const { projects } = JSON.parse(await readFile(projectsFile, 'utf-8')) as { projects: Project[] };
 ---
 
 <Layout title="Projects" pageClass="projects-page">
@@ -37,6 +50,10 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
+
+<script define:vars={{ projects }}>
+  window.__PROJECTS_DATA__ = projects;
+</script>
 
 <script>
   import '../scripts/projects.ts';

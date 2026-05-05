@@ -1,5 +1,4 @@
 /* ── PAGE BACKGROUNDS ── */
-.projects-page #projects::before,
 .contact-page #contact::before {
   content: '';
   position: absolute;
@@ -12,12 +11,28 @@
   z-index: 0;
 }
 
-.projects-page #projects::before {
-  background-image: url('/media/backrund/flowers.webp');
-}
-
 .contact-page #contact::before {
   background-image: url('/media/backrund/haakonvii.webp');
+}
+
+.projects-page #projects {
+  background: linear-gradient(rgba(21, 30, 46, 0.88), rgba(21, 30, 46, 0.88));
+}
+
+.projects-page #projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: max(100vh, 960px);
+  opacity: 0.1;
+  background-image: url('/media/backrund/flowers.webp');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ── ABOUT ── */
