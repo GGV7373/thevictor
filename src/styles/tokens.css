@@ -7,15 +7,25 @@
 }
 
 :root {
-  --color-bg: #151E2E;
-  --color-surface: #1D2840;
-  --color-surface-strong: #0F1824;
-  --color-grid: #232F45;
-  --color-border: rgba(79, 142, 247, 0.15);
+  --color-bg: #121926;
+  --color-bg-gradient:
+    radial-gradient(circle at 12% 18%, rgba(120, 198, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 14%, rgba(80, 124, 255, 0.15), transparent 24%),
+    linear-gradient(180deg, #162033 0%, #121926 52%, #0f1622 100%);
+  --color-surface: #1b2638;
+  --color-surface-strong: #101824;
+  --color-grid: #273549;
+  --color-accent-rgb: 96, 154, 255;
+  --color-accent-alt-rgb: 120, 198, 255;
+  --color-accent-warm-rgb: 80, 124, 255;
+  --color-border: rgba(var(--color-accent-rgb), 0.2);
   --color-text: #F5F8FF;
   --color-text-secondary: rgba(245, 248, 255, 0.82);
   --color-muted: rgba(245, 248, 255, 0.58);
-  --color-accent: #4F8EF7;
+  --color-accent: #609AFF;
+  --color-accent-alt: #78C6FF;
+  --color-accent-warm: #507CFF;
+  --color-highlight: linear-gradient(135deg, var(--color-accent-alt) 0%, var(--color-accent) 48%, var(--color-accent-warm) 100%);
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --max-width: 1120px;
   --transition: 0.22s ease;

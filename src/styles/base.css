@@ -4,7 +4,8 @@ html {
 
 body {
   font-family: 'Manrope', 'Segoe UI', sans-serif;
-  background: var(--color-bg);
+  background: var(--color-bg-gradient);
+  background-attachment: fixed;
   color: var(--color-text);
   line-height: 1.7;
   min-height: 100vh;
@@ -28,7 +29,8 @@ img {
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--wa-soft);
-  background: var(--color-surface-strong);
+  background: linear-gradient(180deg, rgba(16, 24, 36, 0.96) 0%, rgba(16, 24, 36, 0.88) 100%);
+  backdrop-filter: blur(12px);
 }
 
 .nav-inner {
