@@ -15,7 +15,11 @@ const projectsFile = resolve(process.cwd(), 'public', 'data', 'projects.json');
 const { projects } = JSON.parse(await readFile(projectsFile, 'utf-8')) as { projects: Project[] };
 ---
 
-<Layout title="Projects" pageClass="projects-page">
+<Layout
+  title="Projects"
+  description="Browse projects by Victor Husefest, including AI tools, automation scripts, portfolio work, and team collaborations."
+  pageClass="projects-page"
+>
   <section id="projects" class="projects-page-shell">
     <div class="container">
       <div class="section-heading projects-header">

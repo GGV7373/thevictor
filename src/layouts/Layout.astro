@@ -5,10 +5,18 @@ import '../styles/index.css';
 
 interface Props {
   title: string;
+  description?: string;
   pageClass?: string;
 }
 
-const { title, pageClass = '' } = Astro.props;
+const {
+  title,
+  description = 'Portfolio of Victor Husefest, a software developer and IT consultant building practical tools, web projects, and automation-focused solutions.',
+  pageClass = '',
+} = Astro.props;
+
+const canonicalUrl = Astro.url;
+const socialImage = new URL('/me.webp', Astro.site ?? Astro.url).toString();
 ---
 
 <!doctype html>
@@ -17,7 +25,19 @@ const { title, pageClass = '' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/logo.webp" type="image/webp" />
-    <title>{title} | the-victor</title>
+    <title>{title} | thevictor.net</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="thevictor.net" />
+    <meta property="og:title" content={`${title} | thevictor.net`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | thevictor.net`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
   </head>
   <body class={pageClass}>
     <Navigation />
