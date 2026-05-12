@@ -14,7 +14,7 @@
     },
     {
       "name": "AI & ML",
-      "skills": ["AI local and cloud integration"]
+      "skills": ["Ollama", "Claude"]
     },
     {
       "name": "Tools & Soft Skills",
@@ -22,7 +22,7 @@
     },
     {
       "name": "Frameworks",
-      "skills": ["Django", "Flask", "Express.js"]
+      "skills": ["Django", "Flask", "Express.js", "Astro"]
     }
   ],
   "certifications": [

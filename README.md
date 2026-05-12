@@ -1,4 +1,4 @@
-# Victor Husefest Portfolio
+# Portfolio
 
 A personal portfolio website built with Astro showcasing my skills, qualifications, projects, and contact information.
 

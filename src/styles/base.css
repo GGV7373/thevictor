@@ -8,11 +8,19 @@ body {
   background: var(--color-bg-gradient);
   background-attachment: fixed;
   color: var(--color-text);
-  line-height: 1.7;
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   overscroll-behavior-y: none;
+}
+
+p,
+li,
+dd {
+  line-height: 1.78;
 }
 
 a {
@@ -134,7 +142,8 @@ section {
 .section-text {
   max-width: 66ch;
   color: var(--color-text-secondary);
-  font-size: 1.02rem;
+  font-size: 1.06rem;
+  line-height: 1.82;
 }
 
 .page-intro,

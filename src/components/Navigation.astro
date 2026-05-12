@@ -13,7 +13,6 @@ const isHome = currentPath === '/';
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     <ul class="nav-links">
       <li><a href="/" class:list={{ active: isHome }}>Home</a></li>
-      <li><a href="/#about" class:list={{ active: isHome }}>About</a></li>
       <li><a href="/qualifications" class:list={{ active: currentPath === '/qualifications' }}>Qualifications</a></li>
       <li><a href="/projects" class:list={{ active: currentPath === '/projects' }}>Projects</a></li>
       <li><a href="/contact" class:list={{ active: currentPath === '/contact' }}>Contact</a></li>
