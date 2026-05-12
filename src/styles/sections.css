@@ -12,7 +12,7 @@
 }
 
 .contact-page #contact::before {
-  background-image: url('/media/backrund/haakonvii.webp');
+  background-image: url('/media/background/haakonvii.webp');
 }
 
 .projects-page #projects {
@@ -27,7 +27,7 @@
   right: 0;
   height: max(100vh, 960px);
   opacity: 0.1;
-  background-image: url('/media/backrund/flowers.webp');
+  background-image: url('/media/background/flowers.webp');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
