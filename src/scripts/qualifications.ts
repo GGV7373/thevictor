@@ -137,7 +137,9 @@ async function loadQualifications() {
         const tag = document.createElement('a');
         tag.className = 'skill-tag';
         tag.textContent = skill;
-        tag.href = `/projects?q=${encodeURIComponent(skill.toLowerCase())}`;
+        const match = skill.match(/\(([^)]+)\)/);
+        const query = match ? match[1].toLowerCase() : skill.toLowerCase();
+        tag.href = `/projects?q=${encodeURIComponent(query)}`;
         tag.title = `See projects using ${skill}`;
         items.appendChild(tag);
       });
