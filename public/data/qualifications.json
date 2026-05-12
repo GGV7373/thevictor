@@ -6,15 +6,15 @@
     },
     {
       "name": "Backend & Infrastructure",
-      "skills": ["Database Management (MySQL)", "Linux server (Ubuntu)", "Docker", "Windows Server"]
+      "skills": ["Database Management (MySQL)", "Linux", "Docker", "Windows Server"]
     },
     {
       "name": "Cloud & DevOps",
-      "skills": ["Cloud Services (Cloudflare)", "TCP/IP and Networking", "Automation & Scripting", "GitHub Actions"]
+      "skills": ["Cloud Services (Cloudflare)", "TCP/IP and Networking", "Automation", "GitHub Actions"]
     },
     {
       "name": "AI & ML",
-      "skills": ["Ollama", "Claude"]
+      "skills": ["Ollama", "Claude", "llm"]
     },
     {
       "name": "Tools & Soft Skills",
@@ -22,7 +22,7 @@
     },
     {
       "name": "Frameworks",
-      "skills": ["Django", "Flask", "Express.js", "Astro"]
+      "skills": ["Django", "Flask", "Express.js", "React", "Astro"]
     }
   ],
   "certifications": [

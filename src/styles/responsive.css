@@ -5,7 +5,9 @@
   .featured-projects-grid,
   .projects-grid,
   .contact-options,
-  .interests-grid {
+  .interests-grid,
+  .contact-nav-cards,
+  .contact-detailed-grid {
     grid-template-columns: 1fr;
   }
 

@@ -1,3 +1,5 @@
+export {};
+
 interface Project {
   title: string;
   desc: string;
@@ -136,6 +138,11 @@ async function loadAllProjects() {
 
   const searchInput = document.getElementById('projects-search-input') as HTMLInputElement | null;
   if (searchInput) {
+    const urlQ = new URLSearchParams(window.location.search).get('q');
+    if (urlQ) {
+      searchInput.value = urlQ;
+      renderProjects(urlQ);
+    }
     searchInput.addEventListener('input', () => renderProjects(searchInput.value));
   }
 }

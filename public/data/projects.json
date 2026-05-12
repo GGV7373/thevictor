@@ -4,7 +4,7 @@
     {
       "title": "Bibel Ollama",
       "desc": "A Bible study tool that leverages an LLM to provide insights and interpretations.",
-      "tags": ["llm", "python", "team-collaboration"],
+      "tags": ["ollama","llm", "python", "team-collaboration"],
       "link": "https://github.com/GGV7373/Bible-Ollama",
       "linkText": "View on GitHub"
     },
@@ -18,7 +18,7 @@
     {
       "title": "aiawards.no",
       "desc": "The official website for the Tangen VGS AI Awards, showcasing nominees, winners, and event details.",
-      "tags": ["javascript", "llm", "team-collaboration"],
+      "tags": ["javascript", "llm", "team-collaboration", "react"],
       "link": "https://www.aiawards.no",
       "linkText": "View Website"
     },
@@ -34,6 +34,13 @@
       "desc": "A local email generator that uses an LLM to create personalized email content based on user input and preferences, with better privacy for sensitive content.",
       "tags": ["python", "automation", "llm"],
       "link": "https://github.com/GGV7373/ollama-mails",
+      "linkText": "View on GitHub"
+    },
+    {
+      "title": "Bash-Script",
+      "desc": "An automatic bash script that sets up a FreeScout instance on a Linux server, including installation, configuration, and one line command for deployment.",
+      "tags": ["linux", "automation"],
+      "link": "https://github.com/GGV7373/bash-scripts",
       "linkText": "View on GitHub"
     }
   ]

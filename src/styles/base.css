@@ -1,6 +1,7 @@
 html {
   scroll-behavior: smooth;
   overscroll-behavior-y: none;
+  font-size: 17px;
 }
 
 body {
@@ -142,8 +143,8 @@ section {
 .section-text {
   max-width: 66ch;
   color: var(--color-text-secondary);
-  font-size: 1.06rem;
-  line-height: 1.82;
+  font-size: 1.15rem;
+  line-height: 1.85;
 }
 
 .page-intro,

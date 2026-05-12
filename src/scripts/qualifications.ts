@@ -134,9 +134,11 @@ async function loadQualifications() {
       const items = document.createElement('div');
       items.className = 'skill-items';
       cat.skills.forEach(skill => {
-        const tag = document.createElement('span');
+        const tag = document.createElement('a');
         tag.className = 'skill-tag';
         tag.textContent = skill;
+        tag.href = `/projects?q=${encodeURIComponent(skill.toLowerCase())}`;
+        tag.title = `See projects using ${skill}`;
         items.appendChild(tag);
       });
       group.appendChild(items);

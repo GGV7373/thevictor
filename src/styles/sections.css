@@ -111,9 +111,8 @@
   position: relative;
   display: grid;
   gap: 0.75rem;
-  padding: 1.3rem;
-  background: var(--color-surface);
-  border: 1px solid var(--wa-soft);
+  padding: 1rem 0;
+  border-top: 1px solid var(--wa-soft);
 }
 
 .skill-items,
@@ -356,11 +355,218 @@
 }
 
 .contact-intro {
-  max-width: 68ch;
+  max-width: 72ch;
+}
+
+.contact-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contact-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+  flex-shrink: 0;
+}
+
+.contact-lead {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+.contact-can-help {
+  margin-bottom: 0.5rem;
+}
+
+.contact-can-help-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.contact-can-help-list {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.contact-can-help-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.contact-can-help-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--color-accent);
 }
 
 .contact-actions {
   margin-top: 1.5rem;
+}
+
+/* ── CONTACT DETAILED TWO-COLUMN ── */
+.contact-open-for {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.contact-open-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.contact-open-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-pill {
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--wa-frame);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.contact-detailed-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+.contact-main-col .contact-cta-buttons {
+  margin-top: 0;
+}
+
+.contact-side-col .contact-info-box {
+  height: 100%;
+}
+
+.contact-info-box {
+  padding: 1.4rem;
+  border: 1px solid var(--wa-soft);
+  background: var(--color-surface);
+  height: 100%;
+}
+
+.contact-info-box .response-text,
+.contact-info-box .cta-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-top: 0.75rem;
+}
+
+/* ── CONTACT NAV CARDS ── */
+.contact-nav-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contact-nav-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem;
+  background: var(--color-surface);
+  border: 1px solid var(--wa-soft);
+  border-radius: 8px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.contact-nav-card:hover {
+  background: var(--wa-medium);
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.nav-card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.nav-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-card-title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.nav-card-desc {
+  font-size: 0.84rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.nav-card-arrow {
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.contact-nav-card:hover .nav-card-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.contact-response-note {
+  margin-top: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.contact-response-note {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
 }
 
 /* Large CTA contact buttons */

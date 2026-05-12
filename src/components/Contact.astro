@@ -15,26 +15,46 @@ const { detailed = false } = Astro.props;
 
     <div class="contact-intro">
       <div class="contact-description">
-        <p>
-          I'm passionate about building meaningful technology solutions and welcome
-          opportunities to connect with like-minded people. Whether you're interested
-          in collaborating on a project, discussing potential opportunities, or
-          exploring ways we can work together, I'd be glad to hear from you.
-        </p>
+        {detailed ? (
+          <>
+            <p class="contact-lead">
+              I'm passionate about building meaningful technology solutions and welcome
+              opportunities to connect with like-minded people. Whether you're interested
+              in collaborating on a project, discussing potential opportunities, or
+              exploring ways we can work together, I'd be glad to hear from you.
+            </p>
+            <div class="contact-can-help">
+              <p class="contact-can-help-label">What I can help with:</p>
+              <ul class="contact-can-help-list">
+                <li>Building and deploying web applications end-to-end</li>
+                <li>Setting up servers, cloud infrastructure and CI/CD pipelines</li>
+                <li>Integrating AI and automation into existing workflows</li>
+                <li>Advising on tech stack choices and architecture decisions</li>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <p>
+            I'm passionate about building meaningful technology solutions and welcome
+            opportunities to connect with like-minded people. Whether you're interested
+            in collaborating on a project, discussing potential opportunities, or
+            exploring ways we can work together, I'd be glad to hear from you.
+          </p>
+        )}
       </div>
     </div>
 
     {detailed ? (
       <>
-        <div class="contact-methods">
-          <h3 class="contact-subtitle">I'm interested in:</h3>
-          <div class="interests-grid">
-            <div class="interest-item">Freelance &amp; Contract Work</div>
-            <div class="interest-item">Full-time Opportunities</div>
-            <div class="interest-item">Collaboration Projects</div>
-            <div class="interest-item">Tech Discussions &amp; Ideas</div>
-            <div class="interest-item">General Inquiries</div>
-            <div class="interest-item">Consulting</div>
+        <div class="contact-open-for">
+          <span class="contact-open-label">I'm open for:</span>
+          <div class="contact-open-pills">
+            <span class="contact-pill">Freelance &amp; Contract Work</span>
+            <span class="contact-pill">Full-time Opportunities</span>
+            <span class="contact-pill">Collaboration Projects</span>
+            <span class="contact-pill">Tech Discussions &amp; Ideas</span>
+            <span class="contact-pill">General Inquiries</span>
+            <span class="contact-pill">Consulting</span>
           </div>
         </div>
 
@@ -46,22 +66,9 @@ const { detailed = false } = Astro.props;
           </div>
         </div>
 
-        <div class="response-info">
-          <h3 class="contact-subtitle">Response time:</h3>
-          <p class="response-text">
-            I aim to respond to all inquiries within 24 to 48 hours. If you don't
-            receive a response, feel free to follow up, as messages occasionally go
-            undelivered. For time-sensitive matters, LinkedIn may be the most
-            reliable way to reach me.
-          </p>
-        </div>
-
-        <div class="cta-section">
-          <p class="cta-text">
-            I'm open to freelance work and collaborations. If you have an
-            interesting project or opportunity in mind, feel free to reach out.
-          </p>
-        </div>
+        <p class="contact-response-note">
+          Responds within 24–48 hours. For urgent matters, LinkedIn is fastest.
+        </p>
       </>
     ) : (
       <div class="contact-actions">
