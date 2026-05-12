@@ -29,6 +29,7 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --max-width: 1120px;
   --transition: 0.22s ease;
+  --radius: 10px;
   --section-padding: clamp(4rem, 7vw, 6rem);
 
   /* Semi-transparent overlay tokens (white-alpha) */

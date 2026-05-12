@@ -17,7 +17,7 @@
   padding: 1.8rem;
   background: var(--color-surface);
   border: 1px solid var(--wa-soft);
-  border-radius: 2px;
+  border-radius: var(--radius);
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
   cursor: pointer;
 }
