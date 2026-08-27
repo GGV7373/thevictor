@@ -3,79 +3,63 @@ interface Props {
   detailed?: boolean;
 }
 
-const { detailed = false } = Astro.props;
+const GITHUB = 'https://github.com/GGV7373';
+const LINKEDIN = 'https://www.linkedin.com/in/victor-husefest-6372843aa/';
+const EMAIL = 'mailto:thevictor-con@outlook.com';
+
+const canHelp = [
+  'Building and deploying web applications end-to-end',
+  'Setting up servers, cloud infrastructure and CI/CD pipelines',
+  'Integrating AI and automation into existing workflows',
+  'Advising on tech stack choices and architecture decisions',
+];
+
+const openFor = [
+  'Freelance & Contract Work',
+  'Full-time Opportunities',
+  'Collaboration Projects',
+  'Tech Discussions & Ideas',
+  'Consulting',
+  'General Inquiries',
+];
 ---
 
 <section id="contact">
-  <div class="container">
-    <div class="section-heading">
-      <p class="section-eyebrow">Contact</p>
-      <h2 class="section-title">{detailed ? 'Get in touch' : "Let's Talk"}</h2>
-    </div>
+  <div class="container contact-grid">
+    <div class="contact-main">
+      <div class="contact-status">
+        <span class="contact-status-dot"></span>Open for work
+      </div>
+      <h1 class="contact-title">Get in touch</h1>
+      <p class="contact-lead">
+        Freelance, contract or full-time &mdash; send a line about what you need
+        and I&rsquo;ll reply within 24&ndash;48 hours.
+      </p>
 
-    <div class="contact-intro">
-      <div class="contact-description">
-        {detailed ? (
-          <>
-            <p class="contact-lead">
-              I'm passionate about building meaningful technology solutions and welcome
-              opportunities to connect with like-minded people. Whether you're interested
-              in collaborating on a project, discussing potential opportunities, or
-              exploring ways we can work together, I'd be glad to hear from you.
-            </p>
-            <div class="contact-can-help">
-              <p class="contact-can-help-label">What I can help with:</p>
-              <ul class="contact-can-help-list">
-                <li>Building and deploying web applications end-to-end</li>
-                <li>Setting up servers, cloud infrastructure and CI/CD pipelines</li>
-                <li>Integrating AI and automation into existing workflows</li>
-                <li>Advising on tech stack choices and architecture decisions</li>
-              </ul>
-            </div>
-          </>
-        ) : (
-          <p>
-            I'm passionate about building meaningful technology solutions and welcome
-            opportunities to connect with like-minded people. Whether you're interested
-            in collaborating on a project, discussing potential opportunities, or
-            exploring ways we can work together, I'd be glad to hear from you.
-          </p>
-        )}
+      <div class="contact-cta-buttons">
+        <a href={EMAIL} class="contact-email-btn">Send me an email<span aria-hidden="true">&rarr;</span></a>
+        <div class="contact-cta-row">
+          <a href={GITHUB} class="contact-social-btn" target="_blank" rel="noopener noreferrer">
+            <img src="/logo-github.webp" alt="" />GitHub
+          </a>
+          <a href={LINKEDIN} class="contact-social-btn" target="_blank" rel="noopener noreferrer">
+            <img src="/logo-linkedin.webp" alt="" />LinkedIn
+          </a>
+        </div>
+        <p class="contact-response-note">For urgent matters, LinkedIn is fastest.</p>
       </div>
     </div>
 
-    {detailed ? (
-      <>
-        <div class="contact-open-for">
-          <span class="contact-open-label">I'm open for:</span>
-          <div class="contact-open-pills">
-            <span class="contact-pill">Freelance &amp; Contract Work</span>
-            <span class="contact-pill">Full-time Opportunities</span>
-            <span class="contact-pill">Collaboration Projects</span>
-            <span class="contact-pill">Tech Discussions &amp; Ideas</span>
-            <span class="contact-pill">General Inquiries</span>
-            <span class="contact-pill">Consulting</span>
-          </div>
-        </div>
+    <aside class="contact-side-card">
+      <p class="contact-side-label">What I can help with</p>
+      <ul class="contact-can-help-list">
+        {canHelp.map(item => <li>{item}</li>)}
+      </ul>
 
-        <div class="contact-cta-buttons">
-          <a href="mailto:thevictor-con@outlook.com" class="contact-cta-btn">Send me an email</a>
-          <div class="contact-cta-row">
-            <a href="https://github.com/GGV7373" class="contact-cta-btn" target="_blank" rel="noopener noreferrer">My GitHub</a>
-            <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="contact-cta-btn" target="_blank" rel="noopener noreferrer">My LinkedIn</a>
-          </div>
-        </div>
-
-        <p class="contact-response-note">
-          Responds within 24–48 hours. For urgent matters, LinkedIn is fastest.
-        </p>
-      </>
-    ) : (
-      <div class="contact-actions">
-        <a href="mailto:thevictor-con@outlook.com" class="btn">Send an Email</a>
-        <a href="https://github.com/GGV7373" class="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/victor-husefest-6372843aa/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <p class="contact-side-label">Open for</p>
+      <div class="contact-open-pills">
+        {openFor.map(item => <span class="contact-pill">{item}</span>)}
       </div>
-    )}
+    </aside>
   </div>
 </section>

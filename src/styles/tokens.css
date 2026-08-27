@@ -7,43 +7,47 @@
 }
 
 :root {
-  --color-bg: #121926;
-  --color-bg-gradient:
-    radial-gradient(circle at 12% 18%, rgba(120, 198, 255, 0.16), transparent 28%),
-    radial-gradient(circle at 86% 14%, rgba(80, 124, 255, 0.15), transparent 24%),
-    linear-gradient(180deg, #162033 0%, #121926 52%, #0f1622 100%);
-  --color-surface: #1b2638;
-  --color-surface-strong: #101824;
-  --color-grid: #273549;
-  --color-accent-rgb: 96, 154, 255;
-  --color-accent-alt-rgb: 120, 198, 255;
-  --color-accent-warm-rgb: 80, 124, 255;
-  --color-border: rgba(var(--color-accent-rgb), 0.2);
-  --color-text: #F5F8FF;
-  --color-text-secondary: rgba(245, 248, 255, 0.9);
-  --color-muted: rgba(245, 248, 255, 0.72);
-  --color-accent: #609AFF;
-  --color-accent-alt: #78C6FF;
-  --color-accent-warm: #507CFF;
-  --color-highlight: linear-gradient(135deg, var(--color-accent-alt) 0%, var(--color-accent) 48%, var(--color-accent-warm) 100%);
+  /* ── Warm near-black canvas + deep teal accent (redesign) ── */
+  --color-bg: #121311;
+  --color-bg-gradient: #121311;
+  --color-surface: #1B1D1A;
+  --color-surface-strong: #0E0F0D;
+  --color-grid: rgba(255, 255, 255, 0.09);
+
+  --color-accent-rgb: 15, 118, 110;       /* #0F766E deep teal */
+  --color-accent-alt-rgb: 79, 209, 197;   /* #4FD1C5 bright teal */
+  --color-accent-warm-rgb: 15, 118, 110;
+
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-text: #F2F1EC;
+  --color-text-secondary: rgba(242, 241, 236, 0.82);
+  --color-muted: rgba(242, 241, 236, 0.55);
+  --color-accent: #4FD1C5;
+  --color-accent-strong: #0F766E;
+  --color-accent-alt: #4FD1C5;
+  --color-accent-warm: #0F766E;
+  --color-highlight: #4FD1C5;
+
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
   --max-width: 1120px;
   --transition: 0.22s ease;
   --radius: 10px;
-  --section-padding: clamp(4rem, 7vw, 6rem);
+  --section-padding: clamp(3.5rem, 6vw, 5.5rem);
 
-  /* Semi-transparent overlay tokens (white-alpha) */
-  --wa-ghost:  rgba(255,255,255, 0.03);
-  --wa-faint:  rgba(255,255,255, 0.05);
-  --wa-hair:   rgba(255,255,255, 0.06);
-  --wa-soft:   rgba(255,255,255, 0.08);
-  --wa-medium: rgba(255,255,255, 0.12);
-  --wa-frame:  rgba(255,255,255, 0.15);
-  --wa-edge:   rgba(255,255,255, 0.20);
-  --wa-trim:   rgba(255,255,255, 0.25);
-  --wa-focus:  rgba(255,255,255, 0.30);
-  --wa-hover:  rgba(255,255,255, 0.40);
-  --wa-bright: rgba(255,255,255, 0.50);
+  /* Semi-transparent overlay tokens (white-alpha, for the dark canvas) */
+  --wa-ghost:  rgba(255, 255, 255, 0.03);
+  --wa-faint:  rgba(255, 255, 255, 0.045);
+  --wa-hair:   rgba(255, 255, 255, 0.06);
+  --wa-soft:   rgba(255, 255, 255, 0.09);
+  --wa-medium: rgba(255, 255, 255, 0.12);
+  --wa-frame:  rgba(255, 255, 255, 0.14);
+  --wa-edge:   rgba(255, 255, 255, 0.18);
+  --wa-trim:   rgba(255, 255, 255, 0.22);
+  --wa-focus:  rgba(255, 255, 255, 0.30);
+  --wa-hover:  rgba(255, 255, 255, 0.40);
+  --wa-bright: rgba(255, 255, 255, 0.50);
+
+  --accent-wash: rgba(15, 118, 110, 0.22);
+  --accent-line: rgba(79, 209, 197, 0.45);
 }
-
-

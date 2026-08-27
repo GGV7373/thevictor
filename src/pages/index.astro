@@ -1,8 +1,30 @@
 ---
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
 import '../styles/home.css';
+
+interface Project {
+  title: string;
+  desc: string;
+  tags?: string[];
+  link?: string;
+  linkText: string;
+}
+
+const projectsFile = resolve(process.cwd(), 'public', 'data', 'projects.json');
+const { projects } = JSON.parse(await readFile(projectsFile, 'utf-8')) as { projects: Project[] };
+const featured = projects.slice(0, 3);
+const totalProjects = projects.length;
+
+const kindOf = (p: Project) =>
+  (p.tags ?? []).includes('team-collaboration') ? 'Collaboration' : 'Project';
+const stackOf = (p: Project) =>
+  (p.tags ?? [])
+    .filter(t => t !== 'team-collaboration')
+    .map(t => t.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '))
+    .join(' · ');
 ---
 
 <Layout
@@ -10,43 +32,40 @@ import '../styles/home.css';
   description="Victor Husefest is a software developer and IT consultant based in Norway, building practical tools, automation workflows, and web projects."
 >
   <Hero />
-  
-  <About />
 
-  <section id="home-nav">
+  <section id="home-work">
     <div class="container">
+      <div class="home-work-head">
+        <h2 class="home-work-title">Recent work</h2>
+        <a href="/projects" class="home-work-all">All {totalProjects} projects &rarr;</a>
+      </div>
+
+      <div class="home-work-grid">
+        {featured.map(p => (
+          <a href={p.link ?? '/projects'} class="home-work-card" target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined}>
+            <span class="home-work-kind">{kindOf(p)}</span>
+            <span class="home-work-name">{p.title}</span>
+            <span class="home-work-desc">{p.desc}</span>
+            <span class="home-work-stack">{stackOf(p)}</span>
+          </a>
+        ))}
+      </div>
+
       <div class="home-nav-grid">
-
         <a href="/qualifications" class="home-nav-card">
-          <span class="home-nav-eyebrow">Tech competence</span>
-          <h2 class="home-nav-title">Qualifications</h2>
-          <p class="home-nav-desc">
-            Python, JavaScript, HTML &amp; CSS, Cloudflare, TCP/IP, Linux, Docker,
-            AI integration and more.
-          </p>
+          <span>
+            <span class="home-nav-eyebrow">Tech competence</span>
+            <span class="home-nav-title">Qualifications</span>
+          </span>
           <span class="home-nav-arrow">&rarr;</span>
         </a>
-
-        <a href="/projects" class="home-nav-card">
-          <span class="home-nav-eyebrow">Selected work</span>
-          <h2 class="home-nav-title">Projects</h2>
-          <p class="home-nav-desc">
-            Bibel Ollama, aiawards.no, web scrapers and more —
-            see everything I've built.
-          </p>
+        <a href="/contact" class="home-nav-card">
+          <span>
+            <span class="home-nav-eyebrow">Get in touch</span>
+            <span class="home-nav-title">Contact</span>
+          </span>
           <span class="home-nav-arrow">&rarr;</span>
         </a>
-
-        <a href="/contact" class="home-nav-card home-nav-card--wide">
-          <span class="home-nav-eyebrow">Get in touch</span>
-          <h2 class="home-nav-title">Contact</h2>
-          <p class="home-nav-desc">
-            Open to collaboration, freelance work, and new opportunities.
-            I'm always happy to hear from you.
-          </p>
-          <span class="home-nav-arrow">&rarr;</span>
-        </a>
-
       </div>
     </div>
   </section>

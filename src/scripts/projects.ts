@@ -19,8 +19,8 @@ function labelFromTag(tag: string) {
   const labels: Record<string, string> = {
     llm: 'LLM',
     'html-css': 'HTML & CSS',
-    'team-collaboration': 'Team Collaboration',
-    cloudflare: 'Cloud Services',
+    'team-collaboration': 'Collaboration',
+    cloudflare: 'Cloudflare',
     automation: 'Automation',
   };
   if (labels[tag]) return labels[tag];
@@ -30,94 +30,120 @@ function labelFromTag(tag: string) {
     .join(' ');
 }
 
-function buildCard(project: Project, isMain: boolean): HTMLElement {
-  const card = document.createElement('article');
-  card.className = isMain ? 'project-card project-card-main' : 'project-card';
+function kindOf(project: Project) {
+  return (project.tags || []).includes('team-collaboration') ? 'Collaboration' : 'Project';
+}
+
+function stackOf(project: Project) {
+  return (project.tags || [])
+    .filter(t => t !== 'team-collaboration')
+    .map(labelFromTag)
+    .join(' · ');
+}
+
+function buildCard(project: Project): HTMLElement {
+  const card = document.createElement('a');
+  card.className = 'project-card';
+  card.href = project.link || '#';
   card.setAttribute('data-project-title', project.title.toLowerCase());
   card.setAttribute('data-project-tags', (project.tags || []).join(' ').toLowerCase());
-
-  if (!isMain) {
-    const label = document.createElement('p');
-    label.className = 'project-card-label';
-    label.textContent = (project.tags || []).includes('team-collaboration') ? 'Collaboration' : 'Project';
-    card.appendChild(label);
+  if (project.link && !project.link.startsWith('#')) {
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
   }
 
-  const title = document.createElement('h3');
+  const label = document.createElement('span');
+  label.className = 'project-card-label';
+  label.textContent = kindOf(project);
+  card.appendChild(label);
+
+  const title = document.createElement('span');
   title.className = 'project-title';
   title.textContent = project.title;
   card.appendChild(title);
 
-  const desc = document.createElement('p');
+  const desc = document.createElement('span');
   desc.className = 'project-desc';
   desc.textContent = project.desc;
   card.appendChild(desc);
 
-  if (project.tags?.length) {
-    const tags = document.createElement('div');
-    tags.className = 'project-tags';
-    project.tags.forEach((tag: string) => {
-      const pill = document.createElement('span');
-      pill.className = 'skill-tag';
-      pill.textContent = labelFromTag(tag);
-      tags.appendChild(pill);
-    });
-    card.appendChild(tags);
+  const stack = stackOf(project);
+  if (stack) {
+    const stackEl = document.createElement('span');
+    stackEl.className = 'project-stack';
+    stackEl.textContent = stack;
+    card.appendChild(stackEl);
   }
 
-  const link = document.createElement('a');
+  const link = document.createElement('span');
   link.className = 'project-link';
-  link.href = project.link || '#';
   link.textContent = project.linkText + ' →';
-  if (project.link && !project.link.startsWith('#')) {
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-  }
   card.appendChild(link);
 
   return card;
 }
 
 let allProjects: Project[] = [];
+let activeQuery = '';
+let activeTag = '';
 
-function renderProjects(query: string = '') {
-  const mainContainer = document.getElementById('main-project-container');
-  const grid = document.querySelector('[data-projects-grid]') as HTMLElement;
-  const sideContainer = document.getElementById('side-projects-container');
-  if (!mainContainer || !grid || !sideContainer) return;
+function matches(p: Project) {
+  const q = activeQuery.toLowerCase().trim();
+  const queryOk =
+    !q ||
+    p.title.toLowerCase().includes(q) ||
+    p.desc.toLowerCase().includes(q) ||
+    (p.tags || []).some(t => t.includes(q));
+  const tagOk = !activeTag || (p.tags || []).includes(activeTag);
+  return queryOk && tagOk;
+}
 
-  const q = query.toLowerCase().trim();
-  const filtered = q
-    ? allProjects.filter(p =>
-        p.title.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q) ||
-        (p.tags || []).some(t => t.includes(q))
-      )
-    : allProjects;
+function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  if (!grid) return;
 
-  mainContainer.innerHTML = '';
+  const filtered = allProjects.filter(matches);
   grid.innerHTML = '';
 
   if (filtered.length === 0) {
     const empty = document.createElement('p');
     empty.className = 'section-text';
     empty.textContent = 'No projects match your search.';
-    mainContainer.appendChild(empty);
-    sideContainer.style.display = 'none';
+    grid.appendChild(empty);
     return;
   }
 
-  sideContainer.style.display = '';
+  filtered.forEach(p => grid.appendChild(buildCard(p)));
+}
 
-  const [main, ...rest] = filtered;
-  mainContainer.appendChild(buildCard(main, true));
+function renderFilters() {
+  const wrap = document.getElementById('project-filters');
+  if (!wrap) return;
 
-  if (rest.length === 0) {
-    sideContainer.style.display = 'none';
-  } else {
-    sideContainer.style.display = '';
-    rest.forEach(p => grid.appendChild(buildCard(p, false)));
-  }
+  const tagCounts = new Map<string, number>();
+  allProjects.forEach(p => {
+    (p.tags || []).forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0) + 1));
+  });
+  const tags = [...tagCounts.keys()].sort((a, b) => (tagCounts.get(b)! - tagCounts.get(a)!) || a.localeCompare(b));
+
+  wrap.innerHTML = '';
+
+  const makeChip = (label: string, tag: string) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'project-filter-chip';
+    chip.textContent = label;
+    chip.setAttribute('aria-pressed', String(activeTag === tag));
+    chip.addEventListener('click', () => {
+      activeTag = activeTag === tag ? '' : tag;
+      renderFilters();
+      renderProjects();
+    });
+    return chip;
+  };
+
+  wrap.appendChild(makeChip(`All ${allProjects.length}`, ''));
+  tags.forEach(t => wrap.appendChild(makeChip(labelFromTag(t), t)));
 }
 
 async function loadAllProjects() {
@@ -134,16 +160,21 @@ async function loadAllProjects() {
     }
   }
 
+  const searchInput = document.getElementById('projects-search-input') as HTMLInputElement | null;
+  const urlQ = new URLSearchParams(window.location.search).get('q');
+  if (urlQ) {
+    activeQuery = urlQ;
+    if (searchInput) searchInput.value = urlQ;
+  }
+
+  renderFilters();
   renderProjects();
 
-  const searchInput = document.getElementById('projects-search-input') as HTMLInputElement | null;
   if (searchInput) {
-    const urlQ = new URLSearchParams(window.location.search).get('q');
-    if (urlQ) {
-      searchInput.value = urlQ;
-      renderProjects(urlQ);
-    }
-    searchInput.addEventListener('input', () => renderProjects(searchInput.value));
+    searchInput.addEventListener('input', () => {
+      activeQuery = searchInput.value;
+      renderProjects();
+    });
   }
 }
 

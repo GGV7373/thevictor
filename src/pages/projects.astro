@@ -24,32 +24,25 @@ const { projects } = JSON.parse(await readFile(projectsFile, 'utf-8')) as { proj
     <div class="container">
       <div class="section-heading projects-header">
         <div>
-          <p class="section-eyebrow">Archive</p>
-          <h2 class="section-title">Projects</h2>
+          <p class="section-eyebrow">Selected work &middot; {projects.length} projects</p>
+          <h1 class="section-title">Projects</h1>
         </div>
-        <div class="projects-search">
+        <label class="projects-search">
+          <span class="projects-search-icon" aria-hidden="true">&#8981;</span>
           <input
             type="text"
             class="projects-search-input"
-            placeholder="Search"
+            placeholder="Search by name, tech or tag"
             id="projects-search-input"
             aria-label="Search projects"
           />
-        </div>
+        </label>
       </div>
 
-      <p class="section-text page-intro">
-        Here are some of the projects I've worked on. Use the tags to get a quick overview of the tools,
-        languages, and collaboration patterns involved.
-      </p>
+      <div class="project-filters" id="project-filters"></div>
 
       <div class="projects-content-area">
-        <div id="main-project-container"></div>
-
-        <div id="side-projects-container">
-          <h3 class="side-projects-heading">Side projects</h3>
-          <div class="projects-grid" data-projects-grid></div>
-        </div>
+        <div class="projects-grid" id="projects-grid"></div>
       </div>
     </div>
   </section>

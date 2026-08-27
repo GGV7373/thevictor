@@ -126,10 +126,20 @@ async function loadQualifications() {
       const group = document.createElement('div');
       group.className = 'skill-group';
 
+      const head = document.createElement('div');
+      head.className = 'skill-group-head';
+
       const heading = document.createElement('h3');
       heading.className = 'skill-category';
       heading.textContent = cat.name;
-      group.appendChild(heading);
+      head.appendChild(heading);
+
+      const count = document.createElement('span');
+      count.className = 'skill-group-count';
+      count.textContent = String(cat.skills.length);
+      head.appendChild(count);
+
+      group.appendChild(head);
 
       const items = document.createElement('div');
       items.className = 'skill-items';
@@ -160,9 +170,15 @@ async function loadQualifications() {
   section.appendChild(heading);
 
   if (!data.certifications || data.certifications.length === 0) {
-    const empty = document.createElement('p');
-    empty.className = 'no-certifications';
-    empty.textContent = 'No certifications added yet.';
+    const empty = document.createElement('div');
+    empty.className = 'certifications-empty';
+    const emptyTitle = document.createElement('div');
+    emptyTitle.className = 'certifications-empty-title';
+    emptyTitle.textContent = 'None added yet';
+    const emptyText = document.createElement('div');
+    emptyText.className = 'certifications-empty-text';
+    emptyText.textContent = 'They will appear here as cards with a PDF preview.';
+    empty.append(emptyTitle, emptyText);
     section.appendChild(empty);
   } else {
     const grid = document.createElement('div');
