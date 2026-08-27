@@ -24,8 +24,15 @@
 @media (max-width: 820px) {
   .nav-inner {
     padding-inline: 1.25rem;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
+    height: auto;
+    min-height: 54px;
+  }
+
+  .nav-logo {
+    justify-self: auto;
   }
 
   .nav-toggle {
