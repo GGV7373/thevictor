@@ -49,6 +49,34 @@
       "tags": ["linux", "automation"],
       "link": "https://github.com/GGV7373/bash-scripts",
       "linkText": "View on GitHub"
+    },
+    {
+      "title": "Solskinn Frisor",
+      "desc": "A booking and management system for a hair salon, with a four-step customer booking flow and an admin dashboard for staff, schedules, and services.",
+      "tags": ["javascript", "postgresql", "docker"],
+      "link": "https://github.com/GGV7373/Solskinn-Frisoer",
+      "linkText": "View on GitHub"
+    },
+    {
+      "title": "Nora AI",
+      "desc": "A self-hosted AI assistant for private networks that answers questions over uploaded documents using local or cloud LLMs, with no external dependencies required.",
+      "tags": ["python", "ollama", "llm", "docker"],
+      "link": "https://github.com/GGV7373/local_ai",
+      "linkText": "View on GitHub"
+    },
+    {
+      "title": "Bryllup-easy",
+      "desc": "An e-commerce platform for wedding planning services, with accounts, shopping carts, order history, and an admin dashboard for managing inventory and orders.",
+      "tags": ["javascript", "postgresql", "docker"],
+      "link": "https://github.com/GGV7373/IKT-2004-Eksamen",
+      "linkText": "View on GitHub"
+    },
+    {
+      "title": "PDF Reader",
+      "desc": "A tool that lets you ask questions about the contents of a PDF and get answers from a local LLM through Ollama.",
+      "tags": ["python", "ollama", "llm"],
+      "link": "https://github.com/GGV7373/pdf_reader",
+      "linkText": "View on GitHub"
     }
   ]
 }
