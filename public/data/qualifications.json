@@ -1,28 +1,36 @@
 {
   "categories": [
     {
-      "name": "Frontend & Languages",
+      "name": "Languages",
       "skills": ["HTML & CSS", "JavaScript", "Python"]
     },
     {
-      "name": "Backend & Infrastructure",
-      "skills": ["Database Management (MySQL)", "Linux", "Docker", "Windows Server"]
+      "name": "Frameworks",
+      "skills": ["Django", "Flask", "Express.js", "React", "Astro"]
+    },
+    {
+      "name": "Databases",
+      "skills": ["MySQL", "PostgreSQL"]
+    },
+    {
+      "name": "Networking & Systems",
+      "skills": ["Linux", "Windows Server", "TCP/IP and Networking"]
     },
     {
       "name": "Cloud & DevOps",
-      "skills": ["Cloud Services (Cloudflare)", "TCP/IP and Networking", "Automation", "GitHub Actions"]
+      "skills": ["Cloudflare", "Netlify", "Docker", "Automation", "GitHub Actions"]
     },
     {
       "name": "AI & ML",
-      "skills": ["Ollama", "Claude", "Llm"]
+      "skills": ["Ollama", "Claude", "General LLM Knowledge", "Prompt Engineering"]
     },
     {
       "name": "Tools & Soft Skills",
       "skills": ["Git & GitHub", "Problem Solving", "Team Collaboration", "Project Management"]
     },
     {
-      "name": "Frameworks",
-      "skills": ["Django", "Flask", "Express.js", "React", "Astro"]
+      "name": "Other",
+      "skills": ["Printers", "Microsoft Office 360"]
     }
   ],
   "certifications": [

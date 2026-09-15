@@ -23,6 +23,13 @@
       "linkText": "View Website"
     },
     {
+      "title": "Estetikk",
+      "desc": "A personality test that matches users to one of 176 aesthetics based on hidden personality dimensions rather than picture preferences.",
+      "tags": ["html-css", "javascript", "netlify", "json"],
+      "link": "https://estetikk.netlify.app/",
+      "linkText": "View Website"
+    },
+    {
       "title": "Skraper",
       "desc": "A web scraping tool built with Python and BeautifulSoup to extract data from websites and save it in structured formats.",
       "tags": ["python", "automation"],
