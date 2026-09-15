@@ -41,7 +41,9 @@ const socialImage = new URL('/me.webp', Astro.site ?? Astro.url).toString();
   </head>
   <body class={pageClass}>
     <Navigation />
-    <slot />
+    <main class="page-main">
+      <slot />
+    </main>
     <Footer />
     <script>
       import '../scripts/scroll-reveal.ts';

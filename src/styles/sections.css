@@ -368,7 +368,6 @@
 
 /* ── FOOTER ── */
 footer {
-  margin-top: auto;
   border-top: 1px solid var(--wa-soft);
   background: var(--color-surface-strong);
 }

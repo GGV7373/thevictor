@@ -34,6 +34,13 @@ img {
   display: block;
 }
 
+.page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* ── NAVIGATION ── */
 #navbar {
   position: sticky;
