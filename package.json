@@ -10,15 +10,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy dist/client"
+    "deploy": "astro build && wrangler pages deploy dist"
   },
   "dependencies": {
     "astro": "^7.3.2"
   },
   "devDependencies": {
     "@types/node": "^25.6.0"
-  },
-  "overrides": {
-    "vite": "^7"
   }
 }
