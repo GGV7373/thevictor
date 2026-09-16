@@ -17,6 +17,10 @@
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--wa-frame);
+  background:
+    radial-gradient(ellipse at 50% 20%, var(--section-glow), transparent 65%),
+    linear-gradient(160deg, var(--color-surface) 0%, var(--color-surface-strong) 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 .hero-portrait-img {
@@ -24,7 +28,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 8%;
-  filter: grayscale(20%);
+  filter: grayscale(4%) brightness(1.05) contrast(1.03);
 }
 
 .hero-body {

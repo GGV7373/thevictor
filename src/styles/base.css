@@ -5,6 +5,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
@@ -15,6 +16,40 @@ body {
   display: flex;
   flex-direction: column;
   overscroll-behavior-y: none;
+}
+
+/* ── PAGE BACKGROUND PHOTO (one faded photo per page, covers the whole page) ── */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-image:
+    linear-gradient(180deg, rgba(18, 19, 17, 0.7), rgba(18, 19, 17, 0.82)),
+    url('/media/background/Blomsttree_3.webp');
+  filter: grayscale(55%) brightness(0.8) contrast(1.05);
+}
+
+body.qualifications-page::before {
+  background-image:
+    linear-gradient(180deg, rgba(18, 19, 17, 0.7), rgba(18, 19, 17, 0.82)),
+    url('/media/background/flowers.webp');
+}
+
+body.projects-page::before {
+  background-image:
+    linear-gradient(180deg, rgba(18, 19, 17, 0.7), rgba(18, 19, 17, 0.82)),
+    url('/media/background/haakonvii.webp');
+}
+
+body.contact-page::before {
+  background-image:
+    linear-gradient(180deg, rgba(18, 19, 17, 0.7), rgba(18, 19, 17, 0.82)),
+    url('/media/background/flowers.webp');
 }
 
 p,
@@ -157,11 +192,46 @@ section {
   border-bottom: 1px solid var(--wa-hair);
 }
 
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
   position: relative;
   z-index: 1;
+}
+
+/* ── FADED SECTION GLOWS (subtle variety per section, on top of the
+   single page background photo set on body::before) ── */
+#hero::before {
+  background-image: radial-gradient(ellipse 640px 420px at 10% -10%, var(--section-glow), transparent 70%);
+}
+
+#home-work::before,
+#qualifications::before {
+  background-image: radial-gradient(var(--color-grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 85%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 85%);
+}
+
+#about::before {
+  background-image: radial-gradient(ellipse 520px 380px at 90% 100%, var(--section-glow), transparent 70%);
+}
+
+#projects::before {
+  background-image: radial-gradient(ellipse 600px 400px at 100% 0%, var(--section-glow), transparent 70%);
+}
+
+#contact::before {
+  background-image: radial-gradient(ellipse 640px 460px at 50% 0%, var(--section-glow), transparent 72%);
 }
 
 .section-heading {
